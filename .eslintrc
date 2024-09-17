@@ -1,0 +1,20 @@
+{
+    "extends": ["airbnb-base", "prettier"],
+    "plugins": ["prettier"],
+    "env": {
+        "browser": true
+    },
+    "rules": {
+    "no-use-before-define": ["error"],
+    "no-console": 0,
+    "prettier/prettier": ["error"],
+    "import/prefer-default-export": "off",
+    "import/extensions": ["error", "ignorePackages", {
+        "js": "always",
+        "prefer-destructuring": ["error", {
+      "array": true,
+      "object": true
+    }]
+    }]
+    }
+    }
