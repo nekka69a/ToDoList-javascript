@@ -1,16 +1,35 @@
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase-config.js";
-import { handleSubmit } from "./register.js";
-import { handleClickLogin } from "./login.js";
-import { handleClickRegister } from "./register.js";
 import {
+  generateToDoTask,
   generateDoingTask,
   generateDoneTask,
-  generateToDoTask,
+  generateLogoutButton,
 } from "./ui-helpers.js";
+import { handleSubmit } from "./register.js";
+import { handleSubmitLogin } from "./login.js";
 
-function app() {
-  handleClickLogin();
-}
+const setUpEventListener = () => {
+  const handleClickRegister = async () => {
+    const submitRegister = document.getElementById("register-submit");
+    submitRegister.addEventListener("click", handleSubmit);
+    console.log("succes register!");
+  };
 
-export default app;
+  const handleclickLogin = async () => {
+    const submitLogin = document.getElementById("login-submit");
+    submitLogin.addEventListener("click", await handleSubmitLogin);
+    console.log("succes login!");
+  };
+
+  generateToDoTask();
+  generateDoingTask();
+  generateDoneTask();
+  generateLogoutButton();
+  handleClickRegister();
+  handleclickLogin();
+};
+
+const init = () => {
+  setUpEventListener();
+};
+
+export default init;

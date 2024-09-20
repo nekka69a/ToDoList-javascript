@@ -1,8 +1,8 @@
-import app from "./ui.js";
+import init from "./ui.js";
 
-const startApp = async () => {
+const startApp = () => {
   console.log("j'en ai marre");
-  app();
+  init();
 };
 
 // Une fois que le DOM est complètement chargé, démarre l'appli

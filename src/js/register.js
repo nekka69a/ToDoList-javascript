@@ -1,21 +1,11 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "./firebase-config.js";
 
-const auth = getAuth();
-const db = getFirestore();
-
-// Fonction pour ajouter un utilisateur à Firestore
-// async function addUserToFirestore(user) {
-//   try {
-//     const docRef = doc(db, "users", user.uid);
-//     await setDoc(docRef, {
-//       email: user.email,
-//     });
-//     console.log("User added to Firestore:", user);
-//   } catch (error) {
-//     console.error("Error adding user to Firestore:", error);
-//   }
-// }
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 // Fonction pour gérer l'événement de clic sur le bouton de soumission
 const handleSubmit = async (event) => {
@@ -38,16 +28,9 @@ const handleSubmit = async (event) => {
     alert("Création du compte...");
     window.location.href = "dashboard.html";
   } catch (error) {
-    const errorCode = error.code;
     const errorMessage = error.message;
     alert(errorMessage);
   }
 };
 
-const handleClickRegister = () => {
-  const submitRegister = document.getElementById("register-submit");
-  submitRegister.addEventListener("click", handleSubmit);
-  console.log("de cette appli");
-};
-
-export { handleClickRegister };
+export { handleSubmit };
