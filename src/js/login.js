@@ -1,7 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { firebaseConfig } from "./firebase-config.js";
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 const handleSubmitLogin = async (event) => {
   event.preventDefault();
@@ -18,19 +21,15 @@ const handleSubmitLogin = async (event) => {
     window.location.href = "dashboard.html";
   } catch (error) {
     const errorMessage = error.message;
-    alert(errorMessage);
+    console.log(errorMessage);
   }
 };
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
 
 const logout = () => {
   signOut(auth)
     .then(() => {
       console.log("User signed out");
-      window.location.href = "login.html"; // Rediriger vers la page de connexion
+      window.location.href = "login.html";
     })
     .catch((error) => {
       console.error("Error signing out:", error);

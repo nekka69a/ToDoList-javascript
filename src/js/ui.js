@@ -5,7 +5,7 @@ import {
   generateLogoutButton,
 } from "./ui-helpers.js";
 import { handleSubmit } from "./register.js";
-import { handleSubmitLogin } from "./login.js";
+import { handleSubmitLogin, logout } from "./login.js";
 
 const setUpEventListener = () => {
   const handleClickRegister = async () => {
@@ -20,12 +20,18 @@ const setUpEventListener = () => {
     console.log("succes login!");
   };
 
+  const handleClickLogout = async () => {
+    const submitLogout = document.querySelector(".div-logout");
+    submitLogout.addEventListener("click", await logout);
+  };
+
   generateToDoTask();
   generateDoingTask();
   generateDoneTask();
   generateLogoutButton();
   handleClickRegister();
   handleclickLogin();
+  handleClickLogout();
 };
 
 const init = () => {

@@ -29,7 +29,7 @@ const handleSubmit = async (event) => {
     window.location.href = "dashboard.html";
   } catch (error) {
     const errorMessage = error.message;
-    alert(errorMessage);
+    console.log(errorMessage);
   }
 };
 

@@ -14,8 +14,8 @@ body {
 
 .container {
   min-height: 95vh;
-  justify-content: center;
   display: flex;
+  justify-content: center; 
   align-items: center;
 }
 
@@ -71,6 +71,12 @@ button, p {
   margin: 15px auto;
   border-radius: 5px;
   border: none;
+}
+
+.div-logout {
+  width: 150px;
+  margin-left: 150px;
+  
 }
 
 p {

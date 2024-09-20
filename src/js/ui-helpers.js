@@ -1,11 +1,6 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  collection,
-  serverTimestamp,
-  addDoc,
-} from "firebase/firestore";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { firebaseConfig } from "./firebase-config.js";
 import { logout } from "./login.js";
 
@@ -14,12 +9,13 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 // Fonction pour ajouter une tâche à Firestore
-async function addTask(userId, description) {
+async function addTask(title, status, user) {
   try {
-    const tasksRef = collection(db, "users", userId, "tasks");
+    const tasksRef = collection(db, "tasks");
     await addDoc(tasksRef, {
-      description,
-      createdAt: serverTimestamp(),
+      title,
+      status,
+      user,
     });
     console.log("Task added to Firestore");
   } catch (error) {
@@ -42,11 +38,11 @@ const generateNewTask = (buttonSelector, taskListSelector, status) => {
         paragraph.innerText = task;
         taskList.appendChild(paragraph);
 
-        // check le statut de user et ajoute la tâche à Firestore
+        // Ajoute la tâche à Firestore database
         onAuthStateChanged(auth, (user) => {
           if (user) {
-            const userId = user.uid;
-            addTask(userId, task, "", status);
+            const userId = user.email;
+            addTask(task, status, userId);
           } else {
             console.log("User is not signed in");
           }
@@ -69,7 +65,6 @@ const generateDoneTask = () => {
 };
 
 // Fonction pour afficher le bouton de deconexion lorsque l'utilisateur est connecté
-
 const generateLogoutButton = () => {
   onAuthStateChanged(auth, (user) => {
     const divLogout = document.querySelector(".div-logout");
@@ -79,11 +74,6 @@ const generateLogoutButton = () => {
       logoutButton.innerText = "Se deconnecter";
       logoutButton.addEventListener("click", logout);
       divLogout.appendChild(logoutButton);
-    } else {
-      // L'utilisateur n'est pas connecté
-      const loginMessage = document.createElement("p");
-      loginMessage.innerText = "Please login to access the dashboard.";
-      divLogout.appendChild(loginMessage);
     }
   });
 };
