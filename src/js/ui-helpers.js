@@ -1,3 +1,4 @@
+import Sortable from "sortablejs";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
@@ -78,9 +79,31 @@ const generateLogoutButton = () => {
   });
 };
 
+const dragAndDrop = () => {
+  const todo = document.querySelector(".todo-list");
+  const doing = document.querySelector(".doing-list");
+  const done = document.querySelector(".done-list");
+
+  new Sortable(todo, {
+    group: "shared", // set both lists to same group
+    animation: 150,
+  });
+
+  new Sortable(doing, {
+    group: "shared",
+    animation: 150,
+  });
+
+  new Sortable(done, {
+    group: "shared",
+    animation: 150,
+  });
+};
+
 export {
   generateDoingTask,
   generateDoneTask,
   generateToDoTask,
   generateLogoutButton,
+  dragAndDrop,
 };

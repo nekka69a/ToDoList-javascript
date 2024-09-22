@@ -3,6 +3,7 @@ import {
   generateDoingTask,
   generateDoneTask,
   generateLogoutButton,
+  dragAndDrop,
 } from "./ui-helpers.js";
 import { handleSubmit } from "./register.js";
 import { handleSubmitLogin, logout } from "./login.js";
@@ -28,6 +29,7 @@ const setUpEventListener = () => {
   generateToDoTask();
   generateDoingTask();
   generateDoneTask();
+  dragAndDrop();
   generateLogoutButton();
   handleClickRegister();
   handleclickLogin();
