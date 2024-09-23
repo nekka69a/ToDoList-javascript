@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nova+Square&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&display=swap');
 
 html {
   background-color: rgb(16, 16, 39);
@@ -13,21 +14,38 @@ body {
 }
 
 h1 {
-  margin-top: 0;
+  margin: 30px 0 70px 0;
   padding-top: 0;
   height: 100px;
   font-size: 5rem;
   letter-spacing: 1px;
 }
 
+span {
+  font-family: "Herr Von Muellerhoff";
+  font-size: 8rem;
+
+}
+
 .inscription, .connexion{
-  font-size: 4.5rem;
+  margin: 0;
+  font-family: "Anton";
+  font-size: 3.5rem;
   letter-spacing: 1px;
 }
 
+.container-register, .container-login {
+  display: flex;
+  justify-content: center;
+  height: 95vh;
+}
+
 .number {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
   font-size: x-large;
-  margin-bottom: 30vh;
+  margin-bottom: 2vh;
 }
 
 .container {
@@ -35,6 +53,11 @@ h1 {
   display: flex;
   justify-content: center;
   height: 95vh; 
+}
+
+
+.container-login, .container-register {
+  height: 80vh;
 }
 
 .container-dashboard {
@@ -45,19 +68,22 @@ h1 {
     gap: 25px;
 }
 
-.card, .card-register {
-  color:whitesmoke;
-  background-color:  rgba(207, 248, 206, 0.699);
-  width: 350px;
-  border: 1px solid rgb(23, 22, 22);
+.card {
+color: whitesmoke;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
 }
 
-.card-register {
-  margin: 0;
+.card-login, .card-register {
+  color:whitesmoke;
+  background-color:  rgba(207, 248, 206, 0.699);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
 .todo, .doing, .done {
@@ -67,7 +93,7 @@ h1 {
 }
 
 .h2 {
-  font-size: 4rem;
+  font-size: 3rem;
   box-sizing: border-box;
   height: 105px;
   }
@@ -97,21 +123,22 @@ p {
   color: whitesmoke;
   font-size: medium;
   background-color: rgba(12, 31, 13, 0.311);
-  width: 54%;
+  width: 44%;
   padding: 8px 10px;
   text-align: center;
 }
 
 a {
-  font-size: medium;
+  font-size: small;
   color:rgb(16, 16, 39);
   margin-top: 10px;
 }
 
 .form-group {
+  margin-left: 35px;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   width: 80%;
 }
 
