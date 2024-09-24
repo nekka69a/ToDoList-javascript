@@ -18,7 +18,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Fonction pour ajouter une tâche à Firestore
+/**
+ * Add a new task to the Firestore database.
+ * @param {string} title - Title of the task.
+ * @param {string} status - Status of the task
+ * @param {string} user - ID of the user who created the task.
+ */
 async function addTaskToFirestore(title, status, user) {
   try {
     const tasksRef = collection(db, "tasks");
