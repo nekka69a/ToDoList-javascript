@@ -198,11 +198,13 @@ const getUserTasksFromDatabase = (userId) => {
 const generateLogoutButton = (user) => {
   const divLogout = document.querySelector(".div-logout");
   if (user) {
-    const logoutButton = document.createElement("button");
-    logoutButton.innerText = "Deconnexion";
-    logoutButton.style.marginLeft = "570px";
-    logoutButton.addEventListener("click", logout);
-    divLogout.appendChild(logoutButton);
+    const logoutImage = document.createElement("img");
+    logoutImage.src = "/assets/exit.png";
+    logoutImage.alt = "Déconnexion";
+    logoutImage.style.height = "30px";
+    logoutImage.style.width = "30px";
+    logoutImage.addEventListener("click", logout);
+    divLogout.appendChild(logoutImage);
 
     getUserTasksFromDatabase(user.uid);
   }
