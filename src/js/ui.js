@@ -1,17 +1,19 @@
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
-  generateToDoTask,
-  generateDoingTask,
-  generateDoneTask,
+  generateNewTask,
   generateLogoutButton,
   dragAndDrop,
+  getUserTasksFromDatabase,
 } from "./ui-helpers.js";
 import { handleSubmit } from "./register.js";
 import { handleSubmitLogin, logout } from "./login.js";
 
+const auth = getAuth();
+
 const setUpEventListener = () => {
   const handleClickRegister = async () => {
     const submitRegister = document.getElementById("register-submit");
-    submitRegister.addEventListener("click", handleSubmit);
+    submitRegister.addEventListener("click", await handleSubmit);
     console.log("succes register!");
   };
 
@@ -26,11 +28,22 @@ const setUpEventListener = () => {
     submitLogout.addEventListener("click", await logout);
   };
 
-  generateToDoTask();
-  generateDoingTask();
-  generateDoneTask();
-  dragAndDrop();
-  generateLogoutButton();
+  const initializeTaskGeneration = () => {
+    generateNewTask(".todo-button", ".todo-list", "todo");
+    generateNewTask(".doing-button", ".doing-list", "doing");
+    generateNewTask(".done-button", ".done-list", "done");
+  };
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // L'utilisateur est connecté
+      getUserTasksFromDatabase(user.uid);
+      initializeTaskGeneration();
+      dragAndDrop();
+      generateLogoutButton(user);
+    }
+  });
+
   handleClickRegister();
   handleclickLogin();
   handleClickLogout();
