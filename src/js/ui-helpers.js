@@ -27,7 +27,6 @@ async function addTaskToFirestore(title, status, user) {
       status,
       user,
     });
-    console.log("Task added to Firestore");
   } catch (error) {
     console.error("Error adding task to Firestore:", error);
   }
@@ -49,8 +48,6 @@ const generateNewTask = (buttonSelector, taskListSelector, status) => {
       const task = window.prompt("Quel est le contenu de votre tâche ?");
 
       if (task) {
-        console.log("Tâche créée :", task);
-
         onAuthStateChanged(auth, (user) => {
           if (user) {
             const userId = user.uid;
@@ -160,8 +157,6 @@ const getUserTasksFromDatabase = (userId) => {
         taskElement.innerText = task.title;
       }
       if (change.type === "modified") {
-        console.log("Statut changé: ", change.doc.data());
-
         const task = change.doc.data();
         const taskElement = document.querySelector(
           `p[data-id="${change.doc.id}"]`,
@@ -178,8 +173,6 @@ const getUserTasksFromDatabase = (userId) => {
         }
       }
       if (change.type === "removed") {
-        console.log("Tâche supprimée: ", change.doc.data());
-
         const taskElement = document.querySelector(
           `p[data-id="${change.doc.id}"]`,
         );

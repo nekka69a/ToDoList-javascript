@@ -17,7 +17,6 @@ const handleSubmitLogin = async (event) => {
   const password = document.getElementById("password-input").value;
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    alert("Connexion...");
     window.location.href = "dashboard.html";
   } catch (error) {
     const errorMessage = error.message;
@@ -32,7 +31,6 @@ const handleSubmitLogin = async (event) => {
 const logout = () => {
   signOut(auth)
     .then(() => {
-      console.log("User signed out");
       window.location.href = "login.html";
     })
     .catch((error) => {

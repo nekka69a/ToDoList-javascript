@@ -1,7 +1,6 @@
 import init from "./ui.js";
 
 const startApp = () => {
-  console.log("j'en ai marre");
   init();
 };
 

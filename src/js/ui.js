@@ -23,7 +23,6 @@ const setUpEventListener = () => {
   const handleClickRegister = async () => {
     const submitRegister = document.getElementById("register-submit");
     submitRegister.addEventListener("click", await handleSubmit);
-    console.log("succes register!");
   };
 
   /**
@@ -33,7 +32,6 @@ const setUpEventListener = () => {
   const handleclickLogin = async () => {
     const submitLogin = document.getElementById("login-submit");
     submitLogin.addEventListener("click", await handleSubmitLogin);
-    console.log("succes login!");
   };
 
   /**

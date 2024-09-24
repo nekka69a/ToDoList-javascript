@@ -23,14 +23,12 @@ const handleSubmit = async (event) => {
       email.value,
       password.value,
     );
-    console.log(authCredential.user);
 
     const docRef = doc(db, "users", authCredential.user.uid);
     await setDoc(docRef, {
       email: email.value,
     });
 
-    alert("Création du compte...");
     window.location.href = "dashboard.html";
   } catch (error) {
     const errorMessage = error.message;
