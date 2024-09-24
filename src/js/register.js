@@ -7,7 +7,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Fonction pour gérer l'événement de clic sur le bouton de soumission
+/**
+ * Handle the registration
+ * Create a new user with their email and password, adds the user to the Firestore database
+ * @param {Event} event - The form submission event.
+ */
+
 const handleSubmit = async (event) => {
   event.preventDefault();
   const email = document.getElementById("mail-register-input");
@@ -29,7 +34,7 @@ const handleSubmit = async (event) => {
     window.location.href = "dashboard.html";
   } catch (error) {
     const errorMessage = error.message;
-    console.log(errorMessage);
+    console.error(errorMessage);
   }
 };
 

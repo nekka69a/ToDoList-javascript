@@ -33,7 +33,13 @@ async function addTaskToFirestore(title, status, user) {
   }
 }
 
-// Fonction pour générer une nouvelle tâche
+/**
+ *Function that generates a new task
+ * @param {string} buttonSelector - The CSS selector for the button that generates a new task.
+ * @param {string} taskListSelector - The CSS selector for the list that displays the tasks.
+ * @param {string} status - The status of the new task
+ */
+
 const generateNewTask = (buttonSelector, taskListSelector, status) => {
   const button = document.querySelector(buttonSelector);
   const taskList = document.querySelector(taskListSelector);
@@ -45,7 +51,6 @@ const generateNewTask = (buttonSelector, taskListSelector, status) => {
       if (task) {
         console.log("Tâche créée :", task);
 
-        // Ajoute la tâche à Firestore
         onAuthStateChanged(auth, (user) => {
           if (user) {
             const userId = user.uid;
@@ -58,6 +63,28 @@ const generateNewTask = (buttonSelector, taskListSelector, status) => {
     });
   }
 };
+
+/**
+ * Function for updating task status in the database
+ * @param {string} taskId
+ * @param {Object} newStatus
+ */
+
+const updateTaskStatus = async (taskId, newStatus) => {
+  try {
+    const taskRef = doc(db, "tasks", taskId);
+    await updateDoc(taskRef, {
+      status: newStatus,
+    });
+  } catch (error) {
+    console.error("Error updating task status in Firestore:", error);
+  }
+};
+
+/**
+ * This function initializes drag and drop functionality for todo, doing, and done lists.
+ * It updates the task status in the database when a task is dragged and dropped to a new list.
+ */
 
 const dragAndDrop = () => {
   const todoList = document.querySelector(".todo-list");
@@ -104,25 +131,16 @@ const dragAndDrop = () => {
   }
 };
 
-// Fonction pour mettre à jour le statut de la tâche dans la base de données
-const updateTaskStatus = async (taskId, newStatus) => {
-  try {
-    const taskRef = doc(db, "tasks", taskId);
-    await updateDoc(taskRef, {
-      status: newStatus,
-    });
-  } catch (error) {
-    console.error("Error updating task status in Firestore:", error);
-  }
-};
+/**
+ * This function retrieves user tasks from the database and updates the dashboard accordingly.
+ * @param {string} userId - The ID of the user
+ */
 
-// Fonction pour faire persister les données même après la déconnection
 const getUserTasksFromDatabase = (userId) => {
   const q = query(collection(db, "tasks"), where("user", "==", userId));
-  const tasksRef = onSnapshot(q, (snapshot) => {
+  onSnapshot(q, (snapshot) => {
     snapshot.docChanges().forEach((change) => {
       if (change.type === "added") {
-        // Afficher la tâche sur le dashboard
         const task = change.doc.data();
         let taskElement = document.querySelector(
           `p[data-id="${change.doc.id}"]`,
@@ -130,7 +148,7 @@ const getUserTasksFromDatabase = (userId) => {
         if (!taskElement) {
           taskElement = document.createElement("p");
           taskElement.setAttribute("data-id", change.doc.id);
-          // Ajouter la tâche à la liste appropriée en fonction de son statut
+
           if (task.status === "todo") {
             document.querySelector(".todo-list").appendChild(taskElement);
           } else if (task.status === "doing") {
@@ -143,7 +161,7 @@ const getUserTasksFromDatabase = (userId) => {
       }
       if (change.type === "modified") {
         console.log("Statut changé: ", change.doc.data());
-        // Mettre à jour le statut de la tâche sur le dashboard
+
         const task = change.doc.data();
         const taskElement = document.querySelector(
           `p[data-id="${change.doc.id}"]`,
@@ -173,7 +191,12 @@ const getUserTasksFromDatabase = (userId) => {
   });
 };
 
-// Fonction pour afficher le bouton de deconexion lorsque l'utilisateur est connecté
+/**
+ * This function generates a logout button for the user and displays it on the dashboard.
+ * It also retrieves the user's tasks from the database.
+ * @param {Object} user - The user object.
+ */
+
 const generateLogoutButton = (user) => {
   const divLogout = document.querySelector(".div-logout");
   if (user) {
@@ -182,7 +205,7 @@ const generateLogoutButton = (user) => {
     logoutButton.style.marginLeft = "570px";
     logoutButton.addEventListener("click", logout);
     divLogout.appendChild(logoutButton);
-    // Récupération des tâches de l'utilisateur depuis Firestore
+
     getUserTasksFromDatabase(user.uid);
   }
 };
