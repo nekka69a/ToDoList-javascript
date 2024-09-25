@@ -14,6 +14,12 @@ const handleSubmitLogin = async (event) => {
   const errorMsg = document.querySelector(".error-msg");
   const email = emailInput.value;
   const password = passwordInput.value;
+
+  if (!email || !password) {
+    errorMsg.textContent = "Veuillez remplir tous les champs.";
+    return;
+  }
+
   try {
     await signInWithEmailAndPassword(auth, email, password);
     window.location.href = "dashboard.html";

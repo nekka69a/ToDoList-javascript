@@ -7,10 +7,40 @@ import {
   updateDoc,
   query,
   where,
-  onSnapshot,
+  getDocs,
 } from "firebase/firestore";
 import { auth, db } from "./firebase-config.js";
 import { logout } from "./login.js";
+
+/**
+ * This function retrieves user tasks from the database and updates the dashboard accordingly.
+ * @param {string} userId - The ID of the user
+ */
+
+const getUserTasksFromDatabase = async (userId) => {
+  const q = query(collection(db, "tasks"), where("user", "==", userId));
+  const querySnapshot = await getDocs(q);
+
+  querySnapshot.forEach((taskDoc) => {
+    const task = taskDoc.data();
+    let taskElement = document.querySelector(`p[data-id="${taskDoc.id}"]`);
+
+    if (!taskElement) {
+      taskElement = document.createElement("p");
+      taskElement.setAttribute("data-id", taskDoc.id);
+
+      if (task.status === "todo") {
+        document.querySelector(".todo-list").appendChild(taskElement);
+      } else if (task.status === "doing") {
+        document.querySelector(".doing-list").appendChild(taskElement);
+      } else if (task.status === "done") {
+        document.querySelector(".done-list").appendChild(taskElement);
+      }
+    }
+
+    taskElement.innerText = task.title;
+  });
+};
 
 /**
  * Add a new task to the Firestore database.
@@ -26,6 +56,7 @@ async function addTaskToFirestore(title, status, user) {
       status,
       user,
     });
+    getUserTasksFromDatabase(user);
   } catch (error) {
     console.error("Error adding task to Firestore:", error);
   }
@@ -135,62 +166,6 @@ const dragAndDrop = () => {
 };
 
 /**
- * This function retrieves user tasks from the database and updates the dashboard accordingly.
- * @param {string} userId - The ID of the user
- */
-
-const getUserTasksFromDatabase = (userId) => {
-  const q = query(collection(db, "tasks"), where("user", "==", userId));
-  onSnapshot(q, (snapshot) => {
-    snapshot.docChanges().forEach((change) => {
-      if (change.type === "added") {
-        const task = change.doc.data();
-        let taskElement = document.querySelector(
-          `p[data-id="${change.doc.id}"]`,
-        );
-        if (!taskElement) {
-          taskElement = document.createElement("p");
-          taskElement.setAttribute("data-id", change.doc.id);
-
-          if (task.status === "todo") {
-            document.querySelector(".todo-list").appendChild(taskElement);
-          } else if (task.status === "doing") {
-            document.querySelector(".doing-list").appendChild(taskElement);
-          } else if (task.status === "done") {
-            document.querySelector(".done-list").appendChild(taskElement);
-          }
-        }
-        taskElement.innerText = task.title;
-      }
-      if (change.type === "modified") {
-        const task = change.doc.data();
-        const taskElement = document.querySelector(
-          `p[data-id="${change.doc.id}"]`,
-        );
-        if (taskElement) {
-          taskElement.parentNode.removeChild(taskElement);
-          if (task.status === "todo") {
-            document.querySelector(".todo-list").appendChild(taskElement);
-          } else if (task.status === "doing") {
-            document.querySelector(".doing-list").appendChild(taskElement);
-          } else if (task.status === "done") {
-            document.querySelector(".done-list").appendChild(taskElement);
-          }
-        }
-      }
-      if (change.type === "removed") {
-        const taskElement = document.querySelector(
-          `p[data-id="${change.doc.id}"]`,
-        );
-        if (taskElement) {
-          taskElement.parentNode.removeChild(taskElement);
-        }
-      }
-    });
-  });
-};
-
-/**
  * This function generates a logout button for the user and displays it on the dashboard.
  * It also retrieves the user's tasks from the database.
  * @param {Object} user - The user object.
@@ -206,8 +181,6 @@ const generateLogoutButton = (user) => {
     logoutImage.style.width = "30px";
     logoutImage.addEventListener("click", logout);
     divLogout.appendChild(logoutImage);
-
-    getUserTasksFromDatabase(user.uid);
   }
 };
 

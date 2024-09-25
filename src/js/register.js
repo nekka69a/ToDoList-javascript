@@ -12,6 +12,13 @@ const handleSubmit = async (event) => {
   event.preventDefault();
   const email = document.getElementById("mail-register-input");
   const password = document.getElementById("password-register-input");
+  const errorMsg = document.querySelector(".error-msg");
+
+  if (!email || !password) {
+    errorMsg.textContent = "Veuillez remplir tous les champs.";
+    return;
+  }
+
   try {
     const authCredential = await createUserWithEmailAndPassword(
       auth,
@@ -27,6 +34,7 @@ const handleSubmit = async (event) => {
     window.location.href = "dashboard.html";
   } catch (error) {
     const errorMessage = error.message;
+    errorMsg.textContent = "Une erreur s'est produite. Veuillez réessayer.";
     console.error(errorMessage);
   }
 };
