@@ -1,11 +1,6 @@
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "./firebase-config.js";
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "./firebase-config.js";
 
 /**
  * Handle the registration

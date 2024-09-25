@@ -1,8 +1,6 @@
 import Sortable from "sortablejs";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { initializeApp } from "firebase/app";
+import { onAuthStateChanged } from "firebase/auth";
 import {
-  getFirestore,
   collection,
   addDoc,
   doc,
@@ -11,12 +9,8 @@ import {
   where,
   onSnapshot,
 } from "firebase/firestore";
-import { firebaseConfig } from "./firebase-config.js";
+import { auth, db } from "./firebase-config.js";
 import { logout } from "./login.js";
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
 
 /**
  * Add a new task to the Firestore database.

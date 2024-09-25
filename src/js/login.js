@@ -1,9 +1,5 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { firebaseConfig } from "./firebase-config.js";
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { auth } from "./firebase-config.js";
 
 /**
  * This function handles the login process when the login form is submitted.

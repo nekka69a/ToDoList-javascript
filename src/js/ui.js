@@ -1,4 +1,4 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import {
   generateNewTask,
   generateLogoutButton,
@@ -7,8 +7,7 @@ import {
 } from "./ui-helpers.js";
 import { handleSubmit } from "./register.js";
 import { handleSubmitLogin, logout } from "./login.js";
-
-const auth = getAuth();
+import { auth } from "./firebase-config.js";
 
 /**
  * Initialize event listeners for the register, login, and logout buttons.
