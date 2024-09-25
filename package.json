@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint . --ext .js --fix",
-    "build": "webpack --mode production",
-    "build:dev:watch": "webpack --watch --config webpack.config.dev.js NODE_ENV=development"
+    "build": "webpack --mode production"
   },
   "author": "Amina Nekka",
   "license": "ISC",
