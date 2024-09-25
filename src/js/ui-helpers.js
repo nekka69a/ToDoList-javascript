@@ -78,6 +78,28 @@ const updateTaskStatus = async (taskId, newStatus) => {
 };
 
 /**
+ * Callback function that is called when a task is dragged to a new list.
+ * Updates the task status based on the new list.
+ *
+ * @param {Sortable.SortableEvent} event - drag-and-drop end event.
+ */
+
+const handleDragEnd = (event) => {
+  const taskId = event.item.getAttribute("data-id");
+  let newStatus;
+  if (event.to.classList.contains("todo-list")) {
+    newStatus = "todo";
+  } else if (event.to.classList.contains("doing-list")) {
+    newStatus = "doing";
+  } else if (event.to.classList.contains("done-list")) {
+    newStatus = "done";
+  } else {
+    newStatus = "unknown";
+  }
+  updateTaskStatus(taskId, newStatus);
+};
+
+/**
  * This function initializes drag and drop functionality for todo, doing, and done lists.
  * It updates the task status in the database when a task is dragged and dropped to a new list.
  */
@@ -86,21 +108,6 @@ const dragAndDrop = () => {
   const todoList = document.querySelector(".todo-list");
   const doingList = document.querySelector(".doing-list");
   const doneList = document.querySelector(".done-list");
-
-  const handleDragEnd = (event) => {
-    const taskId = event.item.getAttribute("data-id");
-    let newStatus;
-    if (event.to.classList.contains("todo-list")) {
-      newStatus = "todo";
-    } else if (event.to.classList.contains("doing-list")) {
-      newStatus = "doing";
-    } else if (event.to.classList.contains("done-list")) {
-      newStatus = "done";
-    } else {
-      newStatus = "unknown";
-    }
-    updateTaskStatus(taskId, newStatus);
-  };
 
   if (todoList) {
     Sortable.create(todoList, {
