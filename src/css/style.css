@@ -42,6 +42,12 @@ h1 {
   letter-spacing: 1px;
 }
 
+.error-msg {
+  color: rgb(155, 52, 52);
+  margin-top: 10px;
+  font-size: 14px;
+}
+
 /* Containers style */
 
 .container-register, .container-login {

@@ -13,13 +13,17 @@ const auth = getAuth(app);
 
 const handleSubmitLogin = async (event) => {
   event.preventDefault();
-  const email = document.getElementById("mail-input").value;
-  const password = document.getElementById("password-input").value;
+  const emailInput = document.getElementById("mail-input");
+  const passwordInput = document.getElementById("password-input");
+  const errorMsg = document.querySelector(".error-msg");
+  const email = emailInput.value;
+  const password = passwordInput.value;
   try {
     await signInWithEmailAndPassword(auth, email, password);
     window.location.href = "dashboard.html";
   } catch (error) {
     const errorMessage = error.message;
+    errorMsg.textContent = "Veuillez entrer des identifiants valides !";
     console.error(errorMessage);
   }
 };
