@@ -59,7 +59,8 @@ h1 {
 .img {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  align-items: center;
+  gap: 20px;
   font-size: x-large;
   margin-bottom: 2vh;
 }
@@ -183,7 +184,7 @@ and (max-device-width : 768px) {
   }
 
   .img1 {
-    width: 200px;
+    min-width: 200px;
   }
 
   .img2, .img3, .img4 {

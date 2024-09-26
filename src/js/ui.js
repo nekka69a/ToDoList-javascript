@@ -2,7 +2,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import {
   generateNewTask,
   generateLogoutButton,
-  dragAndDrop,
+  dragAndDropBetweenStates,
   getUserTasksFromDatabase,
 } from "./ui-helpers.js";
 import { handleSubmit } from "./register.js";
@@ -57,7 +57,7 @@ const setUpEventListener = () => {
       // L'utilisateur est connecté
       getUserTasksFromDatabase(user.uid);
       initializeTaskGeneration();
-      dragAndDrop();
+      dragAndDropBetweenStates();
       generateLogoutButton(user);
     }
   });
