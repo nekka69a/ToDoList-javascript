@@ -19,27 +19,33 @@ import { logout } from "./login.js";
 
 const updateTasksFromDatabase = async (userId) => {
   const q = query(collection(db, "tasks"), where("user", "==", userId));
-  const querySnapshot = await getDocs(q);
 
-  querySnapshot.forEach((taskDoc) => {
-    const task = taskDoc.data();
-    let taskElement = document.querySelector(`p[data-id="${taskDoc.id}"]`);
+  try {
+    const querySnapshot = await getDocs(q);
 
-    if (!taskElement) {
-      taskElement = document.createElement("p");
-      taskElement.setAttribute("data-id", taskDoc.id);
+    querySnapshot.forEach((taskDoc) => {
+      const task = taskDoc.data();
+      let taskElement = document.querySelector(`p[data-id="${taskDoc.id}"]`);
 
-      if (task.status === "todo") {
-        document.querySelector(".todo-list").appendChild(taskElement);
-      } else if (task.status === "doing") {
-        document.querySelector(".doing-list").appendChild(taskElement);
-      } else if (task.status === "done") {
-        document.querySelector(".done-list").appendChild(taskElement);
+      if (!taskElement) {
+        taskElement = document.createElement("p");
+        taskElement.setAttribute("data-id", taskDoc.id);
+
+        if (task.status === "todo") {
+          document.querySelector(".todo-list").appendChild(taskElement);
+        } else if (task.status === "doing") {
+          document.querySelector(".doing-list").appendChild(taskElement);
+        } else if (task.status === "done") {
+          document.querySelector(".done-list").appendChild(taskElement);
+        }
       }
-    }
 
-    taskElement.innerText = task.title;
-  });
+      taskElement.innerText = task.title;
+    });
+  } catch (error) {
+    const errorMessage = error.message;
+    console.error(errorMessage);
+  }
 };
 
 /**
