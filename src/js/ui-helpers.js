@@ -17,7 +17,7 @@ import { logout } from "./login.js";
  * @param {string} userId - The ID of the user
  */
 
-const getUserTasksFromDatabase = async (userId) => {
+const updateTasksFromDatabase = async (userId) => {
   const q = query(collection(db, "tasks"), where("user", "==", userId));
   const querySnapshot = await getDocs(q);
 
@@ -56,7 +56,7 @@ async function addTaskToFirestore(title, status, user) {
       status,
       user,
     });
-    getUserTasksFromDatabase(user);
+    updateTasksFromDatabase(user);
   } catch (error) {
     console.error("Error adding task to Firestore:", error);
   }
@@ -188,5 +188,5 @@ export {
   generateNewTask,
   generateLogoutButton,
   dragAndDropBetweenStates,
-  getUserTasksFromDatabase,
+  updateTasksFromDatabase,
 };
