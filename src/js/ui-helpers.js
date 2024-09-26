@@ -17,35 +17,51 @@ import { logout } from "./login.js";
  * @param {string} userId - The ID of the user
  */
 
-const updateTasksFromDatabase = async (userId) => {
+const fetchTasksFromDatabase = async (userId) => {
   const q = query(collection(db, "tasks"), where("user", "==", userId));
 
   try {
     const querySnapshot = await getDocs(q);
+    const tasks = [];
 
     querySnapshot.forEach((taskDoc) => {
       const task = taskDoc.data();
-      let taskElement = document.querySelector(`p[data-id="${taskDoc.id}"]`);
-
-      if (!taskElement) {
-        taskElement = document.createElement("p");
-        taskElement.setAttribute("data-id", taskDoc.id);
-
-        if (task.status === "todo") {
-          document.querySelector(".todo-list").appendChild(taskElement);
-        } else if (task.status === "doing") {
-          document.querySelector(".doing-list").appendChild(taskElement);
-        } else if (task.status === "done") {
-          document.querySelector(".done-list").appendChild(taskElement);
-        }
-      }
-
-      taskElement.innerText = task.title;
+      task.id = taskDoc.id;
+      tasks.push(task);
     });
+
+    return tasks;
   } catch (error) {
     const errorMessage = error.message;
     console.error(errorMessage);
+    return [];
   }
+};
+
+const updateTasksUI = (tasks) => {
+  tasks.forEach((task) => {
+    let taskElement = document.querySelector(`p[data-id="${task.id}"]`);
+
+    if (!taskElement) {
+      taskElement = document.createElement("p");
+      taskElement.setAttribute("data-id", task.id);
+
+      if (task.status === "todo") {
+        document.querySelector(".todo-list").appendChild(taskElement);
+      } else if (task.status === "doing") {
+        document.querySelector(".doing-list").appendChild(taskElement);
+      } else if (task.status === "done") {
+        document.querySelector(".done-list").appendChild(taskElement);
+      }
+    }
+
+    taskElement.innerText = task.title;
+  });
+};
+
+const updateTasks = async (userId) => {
+  const tasks = await fetchTasksFromDatabase(userId);
+  updateTasksUI(tasks);
 };
 
 /**
@@ -62,7 +78,7 @@ async function addTaskToFirestore(title, status, user) {
       status,
       user,
     });
-    updateTasksFromDatabase(user);
+    updateTasks(user);
   } catch (error) {
     console.error("Error adding task to Firestore:", error);
   }
@@ -194,5 +210,5 @@ export {
   generateNewTask,
   generateLogoutButton,
   dragAndDropBetweenStates,
-  updateTasksFromDatabase,
+  updateTasks,
 };
