@@ -1,6 +1,5 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import { auth, db } from "./firebase-config.js";
+import { auth } from "./firebase-config.js";
 
 /**
  * Handle the registration
@@ -20,16 +19,7 @@ const handleRegister = async (event) => {
   }
 
   try {
-    const authCredential = await createUserWithEmailAndPassword(
-      auth,
-      email.value,
-      password.value,
-    );
-
-    const docRef = doc(db, "users", authCredential.user.uid);
-    await setDoc(docRef, {
-      email: email.value,
-    });
+    await createUserWithEmailAndPassword(auth, email.value, password.value);
 
     window.location.href = "dashboard.html";
   } catch (error) {
