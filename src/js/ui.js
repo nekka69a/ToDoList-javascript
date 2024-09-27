@@ -1,5 +1,7 @@
 import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase-config.js";
 import {
+  getAuthenticatedUser,
   generateNewTask,
   generateLogoutButton,
   updateDragAndDropData,
@@ -7,7 +9,6 @@ import {
 } from "./ui-helpers.js";
 import { handleRegister } from "./register.js";
 import { handleSubmitLogin, logout } from "./login.js";
-import { auth } from "./firebase-config.js";
 
 /**
  *Function that we handle event click for RegisterButton
@@ -54,10 +55,13 @@ const setUpEventListener = () => {
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      updateDisplayedTasks(user.uid);
+      const authenticatedUser = getAuthenticatedUser();
+      updateDisplayedTasks(authenticatedUser.uid);
       initializeTaskGeneration();
       updateDragAndDropData();
-      generateLogoutButton(user);
+      generateLogoutButton(authenticatedUser);
+    } else {
+      console.log("User is not signed in");
     }
   });
 

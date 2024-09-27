@@ -1,5 +1,4 @@
 import Sortable from "sortablejs";
-import { onAuthStateChanged } from "firebase/auth";
 import {
   collection,
   addDoc,
@@ -98,6 +97,13 @@ async function addTaskToFirestore(title, status, user) {
 }
 
 /**
+ * Returns the currently authenticated user.
+ * @returns {Object|null} The currently authenticated user, or null if no user is authenticated.
+ */
+
+const getAuthenticatedUser = () => auth.currentUser;
+
+/**
  *Function that generates a new task
  * @param {string} buttonSelector - The CSS selector for the button that generates a new task.
  * @param {string} taskListSelector - The CSS selector for the list that displays the tasks.
@@ -113,14 +119,13 @@ const generateNewTask = (buttonSelector, taskListSelector, status) => {
       const task = window.prompt("Quel est le contenu de votre tâche ?");
 
       if (task) {
-        onAuthStateChanged(auth, (user) => {
-          if (user) {
-            const userId = user.uid;
-            addTaskToFirestore(task, status, userId);
-          } else {
-            console.log("User is not signed in");
-          }
-        });
+        const user = getAuthenticatedUser();
+        if (user) {
+          const userId = user.uid;
+          addTaskToFirestore(task, status, userId);
+        } else {
+          console.log("User is not signed in");
+        }
       }
     });
   }
@@ -220,6 +225,7 @@ const generateLogoutButton = (user) => {
 };
 
 export {
+  getAuthenticatedUser,
   generateNewTask,
   generateLogoutButton,
   updateDragAndDropData,
