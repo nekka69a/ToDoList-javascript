@@ -109,7 +109,7 @@ h2 {
 
 .todo, .doing, .done {
   background-color: rgba(207, 248, 206, 0.699);
-  min-width: 340px;
+  min-width: 500px;
   text-align: center;
 }
 
@@ -185,6 +185,28 @@ a {
   height: 30px;
   border: 0px solid transparent;
   padding: 0 10px;
+}
+
+/* Other */
+
+.sortable-ghost {
+  opacity: 0;
+}
+
+.todo, .doing, .done {
+  cursor: grab;
+}
+
+.todo:active {
+  cursor: grabbing;
+} 
+
+.doing:active {
+  cursor: grabbing;
+} 
+
+.done:active {
+  cursor: grabbing;
 }
 
 /* Smartphones (portrait and landscape) ----------- */

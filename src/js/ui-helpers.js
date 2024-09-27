@@ -185,6 +185,7 @@ const updateDragAndDropData = () => {
       group: "shared",
       animation: 150,
       onEnd: handleDragEnd,
+      ghostClass: "sortable-ghost",
     });
   }
 
@@ -193,6 +194,7 @@ const updateDragAndDropData = () => {
       group: "shared",
       animation: 150,
       onEnd: handleDragEnd,
+      ghostClass: "sortable-ghost",
     });
   }
 
@@ -201,6 +203,7 @@ const updateDragAndDropData = () => {
       group: "shared",
       animation: 150,
       onEnd: handleDragEnd,
+      ghostClass: "sortable-ghost",
     });
   }
 };
