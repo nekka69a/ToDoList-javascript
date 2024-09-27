@@ -78,7 +78,7 @@ async function addTaskToFirestore(title, status, user) {
       status,
       user,
     });
-    updateTasks(user);
+    updateDisplayedTasks(user);
   } catch (error) {
     console.error("Error adding task to Firestore:", error);
   }

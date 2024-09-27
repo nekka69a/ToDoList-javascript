@@ -9,6 +9,7 @@ import { auth } from "./firebase-config.js";
 
 const handleSubmitLogin = async (event) => {
   event.preventDefault();
+
   const emailInput = document.getElementById("mail-input");
   const passwordInput = document.getElementById("password-input");
   const errorMsg = document.querySelector(".error-msg");

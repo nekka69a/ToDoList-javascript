@@ -10,38 +10,38 @@ import { handleSubmitLogin, logout } from "./login.js";
 import { auth } from "./firebase-config.js";
 
 /**
+ *Function that we handle event click for RegisterButton
+ */
+
+const handleClickRegister = async () => {
+  const submitRegister = document.getElementById("register-submit");
+  submitRegister.addEventListener("click", await handleSubmit);
+};
+
+/**
+ *Function that we handle event click for LoginButton
+ */
+
+const handleclickLogin = async () => {
+  const submitLogin = document.getElementById("login-submit");
+  submitLogin.addEventListener("click", await handleSubmitLogin);
+};
+
+/**
+ *Function that we handle event click for logoutButton
+ */
+
+const handleClickLogout = async () => {
+  const submitLogout = document.querySelector(".div-logout");
+  submitLogout.addEventListener("click", await logout);
+};
+
+/**
  * Initialize event listeners for the register, login, and logout buttons.
  * Initializes task generation and drag and drop functionality if the user is logged in.
  */
 
 const setUpEventListener = () => {
-  /**
-   *Function that we handle event click for RegisterButton
-   */
-
-  const handleClickRegister = async () => {
-    const submitRegister = document.getElementById("register-submit");
-    submitRegister.addEventListener("click", await handleSubmit);
-  };
-
-  /**
-   *Function that we handle event click for LoginButton
-   */
-
-  const handleclickLogin = async () => {
-    const submitLogin = document.getElementById("login-submit");
-    submitLogin.addEventListener("click", await handleSubmitLogin);
-  };
-
-  /**
-   *Function that we handle event click for logoutButton
-   */
-
-  const handleClickLogout = async () => {
-    const submitLogout = document.querySelector(".div-logout");
-    submitLogout.addEventListener("click", await logout);
-  };
-
   /**
    * Initialize task generation for the todo, doing, and done lists.
    */
@@ -54,7 +54,6 @@ const setUpEventListener = () => {
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // L'utilisateur est connecté
       updateDisplayedTasks(user.uid);
       initializeTaskGeneration();
       dragAndDropBetweenStates();
