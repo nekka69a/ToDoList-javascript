@@ -8,7 +8,7 @@ import { auth, db } from "./firebase-config.js";
  * @param {Event} event - The form submission event.
  */
 
-const handleSubmit = async (event) => {
+const handleRegister = async (event) => {
   event.preventDefault();
   const email = document.getElementById("mail-register-input");
   const password = document.getElementById("password-register-input");
@@ -39,4 +39,4 @@ const handleSubmit = async (event) => {
   }
 };
 
-export { handleSubmit };
+export { handleRegister };

@@ -5,7 +5,7 @@ import {
   dragAndDropBetweenStates,
   updateDisplayedTasks,
 } from "./ui-helpers.js";
-import { handleSubmit } from "./register.js";
+import { handleRegister } from "./register.js";
 import { handleSubmitLogin, logout } from "./login.js";
 import { auth } from "./firebase-config.js";
 
@@ -15,7 +15,7 @@ import { auth } from "./firebase-config.js";
 
 const handleClickRegister = async () => {
   const submitRegister = document.getElementById("register-submit");
-  submitRegister.addEventListener("click", await handleSubmit);
+  submitRegister.addEventListener("click", await handleRegister);
 };
 
 /**
