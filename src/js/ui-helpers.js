@@ -214,13 +214,19 @@ const updateDragAndDropData = () => {
 const generateLogoutButton = (user) => {
   const divLogout = document.querySelector(".div-logout");
   if (user) {
-    const logoutImage = document.createElement("img");
-    logoutImage.src = "/assets/exit.png";
-    logoutImage.alt = "Déconnexion";
-    logoutImage.style.height = "30px";
-    logoutImage.style.width = "30px";
-    logoutImage.addEventListener("click", logout);
-    divLogout.appendChild(logoutImage);
+    const paragrah = document.createElement("p");
+    paragrah.innerHTML = "Deconnexion";
+    divLogout.addEventListener("click", logout);
+    divLogout.appendChild(paragrah);
+  }
+};
+
+const displayCurrentUserName = (user) => {
+  const userName = document.querySelector(".username");
+  if (user) {
+    const paragraph = document.createElement("p");
+    paragraph.innerHTML = `Welcome ${user}`;
+    userName.appendChild(paragraph);
   }
 };
 
@@ -230,4 +236,5 @@ export {
   generateLogoutButton,
   updateDragAndDropData,
   updateDisplayedTasks,
+  displayCurrentUserName,
 };

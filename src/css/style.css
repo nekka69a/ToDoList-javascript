@@ -22,6 +22,10 @@ h1 {
   letter-spacing: 1px;
 }
 
+h2 {
+  margin: 20px;
+}
+
 
 .h2 {
   margin: 0 auto;
@@ -79,7 +83,7 @@ h1 {
   color: whitesmoke;
   display: flex;
   justify-content: center;
-  min-height: 90vh;
+  min-height: 85vh;
   gap: 25px;
 }
 
@@ -126,11 +130,13 @@ button, p {
   margin-top: 60px;
 }
 
-.div-logout {
-  width: 150px;
-  margin-top: 10px;
-  position: relative;
-  left: 90%;
+.div-logout p{
+background-color: rgb(16, 16, 39);
+font-size: 14px;
+display: flex;
+justify-content: center;
+height: 10px;
+cursor: pointer;
 }
 
 p {
@@ -146,6 +152,15 @@ a {
   font-size: small;
   color:rgb(16, 16, 39);
   margin-top: 10px;
+}
+
+.username p{
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  background-color: rgb(16, 16, 39);
+  height: 10px;
+  
 }
 
 /* Forms style */
@@ -232,6 +247,13 @@ and (max-device-width : 768px) {
     width: 44%;
   }
 
+  .user-logout {
+    margin-top: 10px;
+    display: list-item;
+    flex-direction: column;
+    text-align: center;
+  }
+
   .form-group label {
     text-align: left;
     width: 80%;
@@ -246,8 +268,6 @@ and (max-device-width : 768px) {
 
   .div-logout {
     margin-top: 10px;
-    width: 40px;
-    left: 35%;
   }
 }
 
@@ -304,14 +324,6 @@ and (min-width : 1224px) {
   }
   .todo, .doing, .done {
     min-width: 340px;
-  }
-
-
-
-  .div-logout {
-    margin-top: 10px;
-    width: 150px;
-    left: 50%;
   }
 }
 

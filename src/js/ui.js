@@ -6,6 +6,7 @@ import {
   generateLogoutButton,
   updateDragAndDropData,
   updateDisplayedTasks,
+  displayCurrentUserName,
 } from "./ui-helpers.js";
 import { handleRegister } from "./register.js";
 import { handleSubmitLogin, logout } from "./login.js";
@@ -56,6 +57,7 @@ const setUpEventListener = () => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       const authenticatedUser = getAuthenticatedUser();
+      displayCurrentUserName(user.email);
       updateDisplayedTasks(authenticatedUser.uid);
       initializeTaskGeneration();
       updateDragAndDropData();
