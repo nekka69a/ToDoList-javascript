@@ -3,7 +3,7 @@ import {
   generateNewTask,
   generateLogoutButton,
   dragAndDropBetweenStates,
-  updateTasks,
+  updateDisplayedTasks,
 } from "./ui-helpers.js";
 import { handleSubmit } from "./register.js";
 import { handleSubmitLogin, logout } from "./login.js";
@@ -55,7 +55,7 @@ const setUpEventListener = () => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       // L'utilisateur est connecté
-      updateTasks(user.uid);
+      updateDisplayedTasks(user.uid);
       initializeTaskGeneration();
       dragAndDropBetweenStates();
       generateLogoutButton(user);

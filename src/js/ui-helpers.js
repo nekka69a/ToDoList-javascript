@@ -59,7 +59,7 @@ const updateTasksUI = (tasks) => {
   });
 };
 
-const updateTasks = async (userId) => {
+const updateDisplayedTasks = async (userId) => {
   const tasks = await fetchTasksFromDatabase(userId);
   updateTasksUI(tasks);
 };
@@ -210,5 +210,5 @@ export {
   generateNewTask,
   generateLogoutButton,
   dragAndDropBetweenStates,
-  updateTasks,
+  updateDisplayedTasks,
 };
