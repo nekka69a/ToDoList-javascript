@@ -170,7 +170,7 @@ const handleDragEnd = (event) => {
  * It updates the task status in the database when a task is dragged and dropped to a new list.
  */
 
-const dragAndDropBetweenStates = () => {
+const updateDragAndDropData = () => {
   const todoList = document.querySelector(".todo-list");
   const doingList = document.querySelector(".doing-list");
   const doneList = document.querySelector(".done-list");
@@ -222,6 +222,6 @@ const generateLogoutButton = (user) => {
 export {
   generateNewTask,
   generateLogoutButton,
-  dragAndDropBetweenStates,
+  updateDragAndDropData,
   updateDisplayedTasks,
 };

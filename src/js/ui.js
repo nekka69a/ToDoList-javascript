@@ -2,7 +2,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import {
   generateNewTask,
   generateLogoutButton,
-  dragAndDropBetweenStates,
+  updateDragAndDropData,
   updateDisplayedTasks,
 } from "./ui-helpers.js";
 import { handleRegister } from "./register.js";
@@ -56,7 +56,7 @@ const setUpEventListener = () => {
     if (user) {
       updateDisplayedTasks(user.uid);
       initializeTaskGeneration();
-      dragAndDropBetweenStates();
+      updateDragAndDropData();
       generateLogoutButton(user);
     }
   });
