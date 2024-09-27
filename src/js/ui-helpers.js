@@ -13,8 +13,9 @@ import { auth, db } from "./firebase-config.js";
 import { logout } from "./login.js";
 
 /**
- * This function retrieves user tasks from the database and updates the dashboard accordingly.
- * @param {string} userId - The ID of the user
+ * Fetches tasks from the database for a given user ID.
+ * @param {string} userId -ID of the user whose tasks to fetch.
+ * @returns {Promise<Array>} A promise that resolves to an array of task objects.
  */
 
 const fetchTasksFromDatabase = async (userId) => {
@@ -38,6 +39,11 @@ const fetchTasksFromDatabase = async (userId) => {
   }
 };
 
+/**
+ * Updates the UI to display a given array of tasks.
+ * @param {Array} tasks - An array of task objects to display.
+ */
+
 const updateTasksUI = (tasks) => {
   tasks.forEach((task) => {
     let taskElement = document.querySelector(`p[data-id="${task.id}"]`);
@@ -59,6 +65,12 @@ const updateTasksUI = (tasks) => {
   });
 };
 
+/**
+ * Updates the displayed tasks for a given user ID.
+ * Fetches tasks from the database for the user ID and updates the UI to display them.
+ * @param {string} userId - ID of the user whose tasks to display.
+ */
+
 const updateDisplayedTasks = async (userId) => {
   const tasks = await fetchTasksFromDatabase(userId);
   updateTasksUI(tasks);
@@ -70,6 +82,7 @@ const updateDisplayedTasks = async (userId) => {
  * @param {string} status - Status of the task
  * @param {string} user - ID of the user who created the task.
  */
+
 async function addTaskToFirestore(title, status, user) {
   try {
     const tasksRef = collection(db, "tasks");
