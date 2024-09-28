@@ -126,7 +126,7 @@ button, p {
   border: none;
 }
 
-#register-submit, #login-submit {
+.register-submit, .login-submit {
   margin-top: 60px;
 }
 

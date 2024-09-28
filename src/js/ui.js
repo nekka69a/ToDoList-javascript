@@ -15,27 +15,27 @@ import { handleSubmitLogin, logout } from "./login.js";
  *Function that we handle event click for RegisterButton
  */
 
-const handleClickRegister = async () => {
-  const submitRegister = document.getElementById("register-submit");
-  submitRegister.addEventListener("click", await handleRegister);
+const handleClickRegister = () => {
+  const submitRegister = document.querySelector(".register-submit");
+  submitRegister.addEventListener("click", handleRegister);
 };
 
 /**
  *Function that we handle event click for LoginButton
  */
 
-const handleclickLogin = async () => {
-  const submitLogin = document.getElementById("login-submit");
-  submitLogin.addEventListener("click", await handleSubmitLogin);
+const handleclickLogin = () => {
+  const submitLogin = document.querySelector(".login-submit");
+  submitLogin.addEventListener("click", handleSubmitLogin);
 };
 
 /**
  *Function that we handle event click for logoutButton
  */
 
-const handleClickLogout = async () => {
+const handleClickLogout = () => {
   const submitLogout = document.querySelector(".div-logout");
-  submitLogout.addEventListener("click", await logout);
+  submitLogout.addEventListener("click", logout);
 };
 
 /**
