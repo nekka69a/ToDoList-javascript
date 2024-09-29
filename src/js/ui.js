@@ -17,6 +17,9 @@ import { handleSubmitLogin, logout } from "./login.js";
 
 const handleClickRegister = () => {
   const submitRegister = document.querySelector(".register-submit");
+  if (!submitRegister) {
+    return;
+  }
   submitRegister.addEventListener("click", handleRegister);
 };
 
@@ -26,6 +29,9 @@ const handleClickRegister = () => {
 
 const handleclickLogin = () => {
   const submitLogin = document.querySelector(".login-submit");
+  if (!submitLogin) {
+    return;
+  }
   submitLogin.addEventListener("click", handleSubmitLogin);
 };
 
