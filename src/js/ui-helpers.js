@@ -9,7 +9,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { auth, db } from "./firebase-config.js";
-import { logout } from "./login.js";
+import logout from "./logout.js";
 
 /**
  * Fetches tasks from the database for a given user ID.
