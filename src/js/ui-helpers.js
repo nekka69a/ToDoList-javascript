@@ -52,11 +52,11 @@ const updateTasksUI = (tasks) => {
       taskElement.setAttribute("data-id", task.id);
 
       if (task.status === "todo") {
-        document.querySelector(".todo-list").appendChild(taskElement);
+        document.querySelector(".todo").appendChild(taskElement);
       } else if (task.status === "doing") {
-        document.querySelector(".doing-list").appendChild(taskElement);
+        document.querySelector(".doing").appendChild(taskElement);
       } else if (task.status === "done") {
-        document.querySelector(".done-list").appendChild(taskElement);
+        document.querySelector(".done").appendChild(taskElement);
       }
     }
 
@@ -176,9 +176,13 @@ const handleDragEnd = (event) => {
  */
 
 const updateDragAndDropData = () => {
-  const todoList = document.querySelector(".todo-list");
-  const doingList = document.querySelector(".doing-list");
-  const doneList = document.querySelector(".done-list");
+  const todoList = document.querySelector(".todo");
+  const doingList = document.querySelector(".doing");
+  const doneList = document.querySelector(".done");
+
+  todoList.setAttribute("draggable", "true");
+  doingList.setAttribute("draggable", "true");
+  doneList.setAttribute("draggable", "true");
 
   if (todoList) {
     Sortable.create(todoList, {
