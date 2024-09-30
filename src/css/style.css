@@ -1,109 +1,351 @@
-@import url('https://fonts.googleapis.com/css2?family=Nova+Square&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&display=swap');
+
+/* Global styles */
 
 html {
-  background-image: url("/assets/despaired-2261021_1920\ \(2\).jpg");
+  background-color: rgb(16, 16, 39);
 }
 
 body {
-  font-family: "Nova Square";
-  align-items: center;
-  justify-content: center;
+  font-family: "Anton", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  padding: 0;
+}
+
+/* Typography */
+
+h1 {
+  margin: 30px 0 70px 0;
+  padding-top: 0;
+  height: 100px;
+  font-size: 5rem;
+  letter-spacing: 1px;
+}
+
+h2 {
+  margin: 20px;
+}
+
+
+.h2 {
+  margin: 0 auto;
+  font-size: 3rem;
+  box-sizing: border-box;
+  height: 90px;
+  }
+
+.me {
+  font-family: "Herr Von Muellerhoff", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 8rem;
+}
+
+.inscription, .connexion {
+  margin: 0;
+  font-family: "Anton", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 3.5rem;
+  letter-spacing: 1px;
+}
+
+.error-msg {
+  color: rgb(155, 52, 52);
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Containers style */
+
+.container-register, .container-login {
+  display: flex;
+  justify-content: center;
+  height: 95vh;
+}
+
+.img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: x-large;
+  margin-bottom: 2vh;
 }
 
 .container {
-  min-height: 95vh;
-  justify-content: center;
   display: flex;
-  align-items: center;
+  justify-content: center;
+  height: 95vh;
+}
+
+.container-login, .container-register {
+  height: 80vh;
 }
 
 .container-dashboard {
-    color: rgb(21, 20, 20);
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+  color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  min-height: 85vh;
+  gap: 25px;
 }
 
-.card, .card-register {
-  color:rgb(21, 20, 20);
-  backdrop-filter: blur(5px);
-  min-height: 250px;
-  width: 350px;
-  padding: 20px;
-  border: 1px solid rgb(23, 22, 22);
-  border-radius: 10px;
+/* Cards style */
+
+.card {
+  color: whitesmoke;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  align-content: center;
   text-align: center;
 }
 
-.card-register {
-  margin: 0;
-  min-height: 320px;
-  min-width: 380px;
+.card-login, .card-register {
+  color:whitesmoke;
+  background-color:  rgba(207, 248, 206, 0.699);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
 .todo, .doing, .done {
-    margin-top: 15vh;
-    height: 350px;
-    width: 400px;
-    border: 1px solid rgb(23, 22, 22);
-    border-radius: 10px;
-    text-align: center;
+  background-color: rgba(207, 248, 206, 0.699);
+  min-width: 500px;
+  text-align: center;
 }
 
-.h2 {
-   border-bottom: 0.1px solid rgb(23, 22, 22);; 
-}
+/* Buttons and links style */
 
 button, p {
-  font-family: "Nova Square";
-  color: beige;
-  background-color: rgb(23, 22, 22);
-  width: 85%;
+  font-family: "Anton", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: medium;
+  color: whitesmoke;
+  background-color:  rgb(16, 16, 39);
+  width: 50%;
   padding: 8px 10px;
-  margin: 15px auto;
-  border-radius: 5px;
+  margin: 10px auto;
   border: none;
 }
 
+.register-submit, .login-submit {
+  margin-top: 60px;
+}
+
+.div-logout p{
+background-color: rgb(16, 16, 39);
+font-size: 14px;
+display: flex;
+justify-content: center;
+height: 10px;
+cursor: pointer;
+}
+
 p {
-  color: rgb(23, 22, 22);
-  background-color: beige;
-  width: 80%;
-  padding: 6px 10px;
+  color: whitesmoke;
+  font-size: medium;
+  background-color: rgba(12, 31, 13, 0.311);
+  width: 44%;
+  padding: 8px 10px;
   text-align: center;
 }
 
 a {
-  font-size: medium;
-  color:rgb(21, 20, 20);
-  margin-top: 20px;
+  font-size: small;
+  color:rgb(16, 16, 39);
+  margin-top: 10px;
 }
 
+.username p{
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  background-color: rgb(16, 16, 39);
+  height: 10px;
+  
+}
+
+/* Forms style */
+
 .form-group {
+  margin-left: 35px;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   width: 80%;
 }
 
 .form-group label {
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 5px;
   text-align: left;
-  width: 105%; 
+  width: 85%;
 }
 
 .form-group input {
-  width: 100%;
+  width: 80%;
   height: 30px;
-  border-radius: 5px;
   border: 0px solid transparent;
   padding: 0 10px;
 }
+
+/* Other */
+
+.sortable-ghost {
+  opacity: 0;
+}
+
+.todo, .doing, .done {
+  cursor: grab;
+}
+
+.todo:active {
+  cursor: grabbing;
+} 
+
+.doing:active {
+  cursor: grabbing;
+} 
+
+.done:active {
+  cursor: grabbing;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (max-device-width : 768px) {
+  .container-dashboard, .container {
+    margin: auto;
+    flex-direction: column;
+
+    align-items: center;
+    gap: 10px;
+  }
+
+  .img1 {
+    min-width: 200px;
+  }
+
+  .img2, .img3, .img4 {
+    display: none;
+  }
+
+  .img {
+    gap: 0;
+  }
+
+  .todo, .doing, .done {
+    align-items: center;
+    min-width: 250px;
+  }
+
+  .card, .card-login, .card-register {
+    width: 250px;
+  }
+
+  h1, .me {
+    height: 30px;
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .h2 {
+    height: 50px;
+  }
+
+  .connexion, .inscription {
+    font-size: 2.5rem;
+  }
+
+
+  button, p {
+    font-size: small;
+    width: 50%;
+    padding: 8px 10px;
+  }
+
+  p {
+    width: 44%;
+  }
+
+  .user-logout {
+    margin-top: 10px;
+    display: list-item;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .form-group label {
+    text-align: left;
+    width: 80%;
+  }
+
+  .form-group input {
+    width: 70%;
+    height: 25px;
+    border: 0px solid transparent;
+    padding: 0 10px;
+  }
+
+  .div-logout {
+    margin-top: 10px;
+  }
+}
+
+
+
+
+/* Tablets, iPads (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1080px) {
+  h2 {
+    font-size: 2rem;
+  }
+  .container-dashboard, .container {
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .img3, .img4 {
+    display: none;
+  }
+
+  .todo, .doing, .done {
+    align-items: center;
+    width: 500px;
+  }
+
+  button, p {
+    width: 50%;
+  padding: 8px 10px;
+  }
+
+  p {
+    width: 44%;
+  }
+
+  .div-logout {
+    margin-top: 10px;
+    width: 100px;
+    left: 40%;
+  }
+}
+
+
+
+/* Desktops and laptops ----------- */
+@media only screen
+and (min-width : 1224px) {
+  .container-dashboard {
+    flex-direction: row;
+    gap: 25px;
+  }
+  .todo, .doing, .done {
+    min-width: 340px;
+  }
+}
+
