@@ -99,7 +99,7 @@ h2 {
 
 .card-login, .card-register {
   color:whitesmoke;
-  background-color:  rgba(207, 248, 206, 0.699);
+  background-color:  rgba(219, 240, 219, 0.699);
   width: 350px;
   display: flex;
   flex-direction: column;
@@ -108,7 +108,7 @@ h2 {
 }
 
 .todo, .doing, .done {
-  background-color: rgba(207, 248, 206, 0.699);
+  background-color: rgba(219, 240, 219, 0.699);
   min-width: 500px;
   text-align: center;
 }
@@ -148,10 +148,15 @@ p {
   text-align: center;
 }
 
-a {
+.no-account {
   font-size: small;
   color:rgb(16, 16, 39);
   margin-top: 10px;
+}
+
+.no-account:hover {
+  cursor: pointer;
+  color: rgb(42, 47, 38);
 }
 
 .username p{

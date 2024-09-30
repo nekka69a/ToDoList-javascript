@@ -10,6 +10,7 @@ import {
 } from "./ui-helpers.js";
 import { handleRegister } from "./register.js";
 import { handleSubmitLogin, logout } from "./login.js";
+import changeView from "./router.js";
 
 /**
  *Function that we handle event click for RegisterButton
@@ -83,6 +84,7 @@ const setUpEventListener = () => {
  */
 
 const init = () => {
+  changeView();
   setUpEventListener();
 };
 
