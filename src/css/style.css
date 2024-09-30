@@ -10,6 +10,7 @@ html {
 body {
   font-family: "Anton", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
+  overflow-y: auto;
 }
 
 /* Typography */
