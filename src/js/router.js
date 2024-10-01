@@ -1,3 +1,10 @@
+const getCurrentRoute = () => {
+  const currentFullPath = window.location.pathname;
+  const currentRoute = currentFullPath.split("/").pop();
+
+  return currentRoute.replace(".html", "");
+};
+
 /**
  * Redirects the user to a new view.
  * @param {string} view - The name of the view to redirect to.
@@ -44,4 +51,4 @@ const changeView = (view, isFromIndex) => {
 
 window.changeView = changeView;
 
-export default changeView;
+export { getCurrentRoute, changeView };

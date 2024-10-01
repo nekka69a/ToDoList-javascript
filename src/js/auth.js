@@ -1,9 +1,10 @@
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "./firebase-config.js";
-import changeView from "./router.js";
+import { changeView } from "./router.js";
 
 /**
  * Create a new user
@@ -45,4 +46,25 @@ const signInUser = (email, password) => {
     });
 };
 
-export { signUpUser, signInUser };
+/**
+ * Asynchronously gets the current authenticated user
+ * @returns {Promise<User | null>} -- The user object if logged in, otherwise null
+ */
+
+const getUser = async () =>
+  new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (user) => {
+        unsubscribe();
+        if (user) {
+          resolve(user);
+        } else {
+          resolve(null);
+        }
+      },
+      reject,
+    );
+  });
+
+export { signUpUser, signInUser, getUser };

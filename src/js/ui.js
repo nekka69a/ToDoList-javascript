@@ -11,7 +11,8 @@ import {
 import handleRegister from "./register.js";
 import handleSubmitLogin from "./login.js";
 import logout from "./logout.js";
-import changeView from "./router.js";
+import { changeView } from "./router.js";
+import initializeProtectionRouterListener from "./middleware.js";
 
 /**
  *Function that we handle event click for RegisterButton
@@ -85,6 +86,7 @@ const setUpEventListener = () => {
  */
 
 const init = () => {
+  initializeProtectionRouterListener();
   changeView();
   setUpEventListener();
 };
