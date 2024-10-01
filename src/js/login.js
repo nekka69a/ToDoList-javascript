@@ -1,5 +1,4 @@
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { auth } from "./firebase-config.js";
+import { signInUser } from "./auth.js";
 
 /**
  * This function handles the login process when the login form is submitted.
@@ -7,28 +6,20 @@ import { auth } from "./firebase-config.js";
  * @param {Event} event - The form submission event.
  */
 
-const handleSubmitLogin = async (event) => {
+const handleSubmitLogin = (event) => {
   event.preventDefault();
 
   const emailInput = document.getElementById("mail-input");
   const passwordInput = document.getElementById("password-input");
-  const errorMsg = document.querySelector(".error-msg");
+  const errorMsg = document.querySelector(".error-msg-login");
+
   const email = emailInput.value;
   const password = passwordInput.value;
 
   if (!email || !password) {
     errorMsg.textContent = "Veuillez remplir tous les champs.";
-    return;
   }
-
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    window.location.href = "dashboard.html";
-  } catch (error) {
-    const errorMessage = error.message;
-    errorMsg.textContent = "Veuillez entrer des identifiants valides !";
-    console.error(errorMessage);
-  }
+  signInUser(email, password);
 };
 
-export { handleSubmitLogin };
+export default handleSubmitLogin;

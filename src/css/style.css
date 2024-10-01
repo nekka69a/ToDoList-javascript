@@ -47,7 +47,7 @@ h2 {
   letter-spacing: 1px;
 }
 
-.error-msg {
+.error-msg-login, .error-msg-register {
   color: rgb(155, 52, 52);
   margin-top: 10px;
   font-size: 14px;
@@ -110,7 +110,7 @@ h2 {
 
 .todo, .doing, .done {
   background-color: rgba(219, 240, 219, 0.699);
-  min-width: 500px;
+  min-width: 400px;
   text-align: center;
 }
 

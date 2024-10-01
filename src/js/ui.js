@@ -8,8 +8,8 @@ import {
   updateDisplayedTasks,
   displayCurrentUserName,
 } from "./ui-helpers.js";
-import { handleRegister } from "./register.js";
-import { handleSubmitLogin } from "./login.js";
+import handleRegister from "./register.js";
+import handleSubmitLogin from "./login.js";
 import logout from "./logout.js";
 import changeView from "./router.js";
 

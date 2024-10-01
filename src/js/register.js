@@ -1,5 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase-config.js";
+import { signUpUser } from "./auth.js";
 
 /**
  * Handle the registration
@@ -7,26 +6,20 @@ import { auth } from "./firebase-config.js";
  * @param {Event} event - The form submission event.
  */
 
-const handleRegister = async (event) => {
+const handleRegister = (event) => {
   event.preventDefault();
-  const email = document.getElementById("mail-register-input");
-  const password = document.getElementById("password-register-input");
-  const errorMsg = document.querySelector(".error-msg");
+  const emailInput = document.getElementById("mail-register-input");
+  const passwordInput = document.getElementById("password-register-input");
+  const errorMsg = document.querySelector(".error-msg-register");
+
+  const email = emailInput.value;
+  const password = passwordInput.value;
 
   if (!email || !password) {
     errorMsg.textContent = "Veuillez remplir tous les champs.";
     return;
   }
-
-  try {
-    await createUserWithEmailAndPassword(auth, email.value, password.value);
-
-    window.location.href = "dashboard.html";
-  } catch (error) {
-    const errorMessage = error.message;
-    errorMsg.textContent = "Une erreur s'est produite. Veuillez réessayer.";
-    console.error(errorMessage);
-  }
+  signUpUser(email, password);
 };
 
-export { handleRegister };
+export default handleRegister;

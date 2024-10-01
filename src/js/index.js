@@ -1,6 +1,6 @@
 import init from "./ui.js";
 
-const startApp = () => {
+const startApp = async () => {
   init();
 };
 
