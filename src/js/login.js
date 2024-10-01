@@ -18,6 +18,7 @@ const handleSubmitLogin = (event) => {
 
   if (!email || !password) {
     errorMsg.textContent = "Veuillez remplir tous les champs.";
+    return;
   }
   signInUser(email, password);
 };

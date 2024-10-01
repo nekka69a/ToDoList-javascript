@@ -36,6 +36,10 @@ const changeView = (view, isFromIndex) => {
     // rediriger vers register
     redirect("register", isFromIndex);
   }
+
+  if (view === "dashboard") {
+    redirect("dashboard");
+  }
 };
 
 window.changeView = changeView;

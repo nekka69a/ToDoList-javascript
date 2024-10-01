@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "./firebase-config.js";
+import changeView from "./router.js";
 
 /**
  * Create a new user
@@ -15,7 +16,7 @@ const signUpUser = (email, password) => {
   const errorMsg = document.querySelector(".error-msg-register");
   createUserWithEmailAndPassword(auth, email, password)
     .then(() => {
-      window.location.href = "dashboard.html";
+      changeView("dashboard");
     })
     .catch((error) => {
       const errorMessage = error.message;
@@ -35,7 +36,7 @@ const signInUser = (email, password) => {
   const errorMsg = document.querySelector(".error-msg-login");
   signInWithEmailAndPassword(auth, email, password)
     .then(() => {
-      window.location.href = "dashboard.html";
+      changeView("dashboard");
     })
     .catch((error) => {
       const errorMessage = error.message;
