@@ -52,11 +52,11 @@ const updateTasksUI = (tasks) => {
       taskElement.setAttribute("data-id", task.id);
 
       if (task.status === "todo") {
-        document.querySelector(".todo").appendChild(taskElement);
+        document.querySelector(".todo-list").appendChild(taskElement);
       } else if (task.status === "doing") {
-        document.querySelector(".doing").appendChild(taskElement);
+        document.querySelector(".doing-list").appendChild(taskElement);
       } else if (task.status === "done") {
-        document.querySelector(".done").appendChild(taskElement);
+        document.querySelector(".done-list").appendChild(taskElement);
       }
     }
 
@@ -158,11 +158,11 @@ const updateTaskStatus = async (taskId, newStatus) => {
 const handleDragEnd = (event) => {
   const taskId = event.item.getAttribute("data-id");
   let newStatus;
-  if (event.to.classList.contains("todo-list")) {
+  if (event.to.classList.contains("todo")) {
     newStatus = "todo";
-  } else if (event.to.classList.contains("doing-list")) {
+  } else if (event.to.classList.contains("doing")) {
     newStatus = "doing";
-  } else if (event.to.classList.contains("done-list")) {
+  } else if (event.to.classList.contains("done")) {
     newStatus = "done";
   } else {
     newStatus = "unknown";
@@ -176,13 +176,9 @@ const handleDragEnd = (event) => {
  */
 
 const updateDragAndDropData = () => {
-  const todoList = document.querySelector(".todo");
-  const doingList = document.querySelector(".doing");
-  const doneList = document.querySelector(".done");
-
-  todoList.setAttribute("draggable", "true");
-  doingList.setAttribute("draggable", "true");
-  doneList.setAttribute("draggable", "true");
+  const todoList = document.querySelector(".todo-list");
+  const doingList = document.querySelector(".doing-list");
+  const doneList = document.querySelector(".done-list");
 
   if (todoList) {
     Sortable.create(todoList, {
