@@ -114,8 +114,8 @@ h2 {
   text-align: center;
 }
 
-.todo-list, .doing-list, .done-list {
-  min-height: 20vh;
+#todo-list, #doing-list, #done-list {
+  min-height: 30vh;
 }
 
 /* Buttons and links style */

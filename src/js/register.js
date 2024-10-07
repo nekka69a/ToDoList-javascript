@@ -22,4 +22,16 @@ const handleRegister = (event) => {
   signUpUser(email, password);
 };
 
-export default handleRegister;
+/**
+ *Function that we handle event click for RegisterButton
+ */
+
+const handleClickRegister = () => {
+  const submitRegister = document.querySelector(".register-submit");
+  if (!submitRegister) {
+    return;
+  }
+  submitRegister.addEventListener("click", handleRegister);
+};
+
+export { handleRegister, handleClickRegister };

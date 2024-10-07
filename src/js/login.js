@@ -23,4 +23,16 @@ const handleSubmitLogin = (event) => {
   signInUser(email, password);
 };
 
-export default handleSubmitLogin;
+/**
+ *Function that we handle event click for LoginButton
+ */
+
+const handleClickLogin = () => {
+  const submitLogin = document.querySelector(".login-submit");
+  if (!submitLogin) {
+    return;
+  }
+  submitLogin.addEventListener("click", handleSubmitLogin);
+};
+
+export { handleSubmitLogin, handleClickLogin };

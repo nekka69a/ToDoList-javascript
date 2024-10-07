@@ -2,6 +2,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 import { auth } from "./firebase-config.js";
 import { changeView } from "./router.js";
@@ -67,4 +68,10 @@ const getUser = async () =>
     );
   });
 
-export { signUpUser, signInUser, getUser };
+/**
+ * Disconnect User
+ */
+
+const disconnectUser = () => signOut(auth);
+
+export { signUpUser, signInUser, getUser, disconnectUser };
