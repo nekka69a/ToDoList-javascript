@@ -10,6 +10,7 @@ import {
 import Sortable from "sortablejs";
 import { db } from "./firebase-config.js";
 import { getAuthenticatedUser } from "./ui-helpers.js";
+import { getUser } from "./auth.js";
 
 /**
  * Function for updating task status in the database
@@ -18,6 +19,11 @@ import { getAuthenticatedUser } from "./ui-helpers.js";
  */
 
 const updateTaskStatus = async (taskId, newStatus) => {
+  if (!taskId || newStatus) {
+    console.warn("No task ID or status provided");
+    return;
+  }
+
   try {
     const taskRef = doc(db, "tasks", taskId);
     await updateDoc(taskRef, {
@@ -56,7 +62,7 @@ const handleDragEnd = (event) => {
  */
 
 const initializeDragAndDropColumns = () => {
-  const columnsContainers = document.getElementsByClassName("task-container");
+  const columnsContainers = document.querySelectorAll("#task-container");
 
   if (columnsContainers === 0) {
     console.warn("No columns found on the page");
@@ -82,8 +88,13 @@ const initializeDragAndDropColumns = () => {
  * @returns {Promise<Array>} A promise that resolves to an array of task objects.
  */
 
-const fetchTasksFromDatabase = async (userId) => {
-  const q = query(collection(db, "tasks"), where("user", "==", userId));
+const fetchTasksFromDatabase = async () => {
+  const user = await getUser();
+  if (!user) {
+    console.warn("No user loggued in. Can no retrive initial tasks.");
+    return [];
+  }
+  const q = query(collection(db, "tasks"), where("user", "==", user.uid));
 
   try {
     const querySnapshot = await getDocs(q);
@@ -117,11 +128,11 @@ const updateTasksUI = (tasks) => {
       taskElement.setAttribute("data-id", task.id);
 
       if (task.status === "todo") {
-        document.getElementById("todo-list").appendChild(taskElement);
+        document.querySelector(".todo-list").appendChild(taskElement);
       } else if (task.status === "doing") {
-        document.getElementById("doing-list").appendChild(taskElement);
+        document.querySelector(".doing-list").appendChild(taskElement);
       } else if (task.status === "done") {
-        document.getElementById("done-list").appendChild(taskElement);
+        document.querySelector(".done-list").appendChild(taskElement);
       }
     }
 
@@ -135,9 +146,18 @@ const updateTasksUI = (tasks) => {
  * @param {string} userId - ID of the user whose tasks to display.
  */
 
-const updateDisplayedTasks = async (userId) => {
-  const tasks = await fetchTasksFromDatabase(userId);
-  updateTasksUI(tasks);
+const updateDisplayedTasks = async () => {
+  const currentUser = getAuthenticatedUser();
+  const userId = currentUser ? currentUser.uid : null;
+
+  if (!userId) {
+    return;
+  }
+
+  if (userId) {
+    const tasks = await fetchTasksFromDatabase(userId);
+    updateTasksUI(tasks);
+  }
 };
 
 /**
@@ -155,7 +175,7 @@ async function addTaskToFirestore(title, status, user) {
       status,
       user,
     });
-    updateDisplayedTasks(user);
+    updateDisplayedTasks();
   } catch (error) {
     console.error("Error adding task to Firestore:", error);
   }
@@ -171,6 +191,10 @@ async function addTaskToFirestore(title, status, user) {
 const generateNewTask = (buttonSelector, taskListSelector, status) => {
   const button = document.querySelector(buttonSelector);
   const taskList = document.querySelector(taskListSelector);
+
+  if (!button && !taskList) {
+    console.warn = "No button or task list found on the page";
+  }
 
   if (button && taskList) {
     button.addEventListener("click", () => {
@@ -193,10 +217,16 @@ const generateNewTask = (buttonSelector, taskListSelector, status) => {
  * Initialize task generation for the todo, doing, and done lists.
  */
 
-const initializeAddNewTaskListener = () => {
-  generateNewTask(".todo-button", "#todo-list", "todo");
-  generateNewTask(".doing-button", "#doing-list", "doing");
-  generateNewTask(".done-button", "#done-list", "done");
+const initializeAddNewTaskListener = async () => {
+  const currentUser = await getUser();
+  if (currentUser) {
+    generateNewTask(".todo-button", ".todo-list", "todo");
+    generateNewTask(".doing-button", ".doing-list", "doing");
+    generateNewTask(".done-button", ".done-list", "done");
+    updateDisplayedTasks();
+  } else {
+    console.warn("User is not signed in !");
+  }
 };
 
 export {
