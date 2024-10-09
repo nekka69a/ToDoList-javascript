@@ -1,5 +1,6 @@
 import { changeView } from "./router.js";
 import { disconnectUser } from "./auth.js";
+import { showAlert } from "./ui-helpers.js";
 
 /**
  * Sign out the current user and redirects them to the login page.
@@ -18,6 +19,7 @@ const logout = () => {
         changeView("login");
       })
       .catch((error) => {
+        showAlert("Oups problème lors de la deconnexion");
         console.error("Error signing out:", error);
       });
   });

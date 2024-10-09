@@ -47,10 +47,11 @@ h2 {
   letter-spacing: 1px;
 }
 
-.error-msg-login, .error-msg-register {
-  color: rgb(155, 52, 52);
-  margin-top: 10px;
-  font-size: 14px;
+.error-msg {
+  color: rgb(183, 49, 49);
+  margin-top: 7px;
+  font-size: 12px;
+  text-align: center;
 }
 
 /* Containers style */
@@ -88,6 +89,12 @@ h2 {
   gap: 25px;
 }
 
+.registration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Cards style */
 
 .card {
@@ -115,7 +122,7 @@ h2 {
 }
 
 .todo-list, .doing-list, .done-list {
-  min-height: 3vh;
+  min-height: 10vh;
 
 }
 
@@ -159,7 +166,7 @@ background-color: rgb(16, 16, 39);
 font-size: 14px;
 display: flex;
 justify-content: center;
-height: 10px;
+height: 8px;
 cursor: pointer;
 }
 
@@ -180,7 +187,21 @@ p {
 
 .no-account:hover {
   cursor: pointer;
-  color: rgb(42, 47, 38);
+  color: rgb(39, 57, 119);
+}
+
+#submit-register {
+  margin: 0;
+  width: 100%;
+}
+
+#submit-login {
+  margin: 0;
+  width: 100%;
+}
+
+.link-login:hover, .link-register:hover{
+  cursor: pointer;
 }
 
 .username p{
@@ -330,6 +351,10 @@ and (max-device-width : 768px) {
     height: 20px;
     animation: spin 2s linear infinite;
     margin-left: 100px;
+  }
+
+  .error-msg {
+    font-size: 12px;
   }
 }
 

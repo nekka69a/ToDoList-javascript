@@ -1,4 +1,5 @@
 import { signUpUser } from "./auth.js";
+import { showAlert } from "./ui-helpers.js";
 
 /**
  * Handle the registration
@@ -10,13 +11,12 @@ const handleRegister = (event) => {
   event.preventDefault();
   const emailInput = document.getElementById("mail-register-input");
   const passwordInput = document.getElementById("password-register-input");
-  const errorMsg = document.querySelector(".error-msg-register");
 
   const email = emailInput.value;
   const password = passwordInput.value;
 
   if (!email || !password) {
-    errorMsg.textContent = "Veuillez remplir tous les champs.";
+    showAlert("Veuillez remplir tous les champs !");
     return;
   }
   signUpUser(email, password);

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../src/css/style.css">
     <script src="/dist/bundle.js"></script>
   </head>
-  <body>
+  <body id="body-register">
     <div class="container-register">
       <div class="card-register">
         <div><h1 class="inscription">INSCRIPTION</h1></div>
@@ -21,8 +21,12 @@
           <label for="password">Mot de passe:</label>
           <input type="password" name="password" id="password-register-input" required minlength="8">
         </form>
-        <div class="error-msg-register"></div>
         <button type="submit" class="register-submit">Créer son compte</button>
+        <div id="error-msg-container" class="error-msg" style="display: none;">
+          <div class="error-box">
+            <span class="alert-msg"></span>
+          </div>
+        </div>
         <div class="no-account" onclick="changeView('login')"><strong>Déjà un compte ? Connectez-vous !</strong></div>
       </div>
     </div>

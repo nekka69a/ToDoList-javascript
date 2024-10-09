@@ -6,6 +6,7 @@ import {
 } from "firebase/auth";
 import { auth } from "./firebase-config.js";
 import { changeView } from "./router.js";
+import { showAlert } from "./ui-helpers.js";
 
 /**
  * Create a new user
@@ -15,15 +16,13 @@ import { changeView } from "./router.js";
  */
 
 const signUpUser = (email, password) => {
-  const errorMsg = document.querySelector(".error-msg-register");
   createUserWithEmailAndPassword(auth, email, password)
     .then(() => {
       changeView("dashboard");
     })
     .catch((error) => {
-      const errorMessage = error.message;
-      errorMsg.textContent = "Une erreur s'est produite. Veuillez réessayer.";
-      console.error(errorMessage);
+      showAlert("Veuillez entrer des identifiants valides !");
+      console.error(error);
     });
 };
 
@@ -35,15 +34,13 @@ const signUpUser = (email, password) => {
  */
 
 const signInUser = (email, password) => {
-  const errorMsg = document.querySelector(".error-msg-login");
   signInWithEmailAndPassword(auth, email, password)
     .then(() => {
       changeView("dashboard");
     })
     .catch((error) => {
-      const errorMessage = error.message;
-      errorMsg.textContent = "Veuillez entrer des identifiants valides !";
-      console.error(errorMessage);
+      showAlert("Veuillez entrer des identifiants valides !");
+      console.error(error);
     });
 };
 

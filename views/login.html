@@ -22,10 +22,14 @@
           <label for="password">Mot de passe:</label>
           <input type="password" name="password" id="password-input" required minlength="8">
         </form>
-        <div class="error-msg-login"></div>
         <button type="submit" class="login-submit">Se connecter</button>
+        <div id="error-msg-container" class="error-msg" style="display: none;">
+          <div class="error-box">
+            <span class="alert-msg"></span>
+          </div>
+        </div>
         <div class="no-account" onclick="changeView('register')"><strong>Pas encore de compte ? Inscrivez-vous !</strong></div>
-      </div>
+      
     </div>
   </body>
 </html>
