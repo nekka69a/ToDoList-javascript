@@ -9,7 +9,7 @@ import {
 } from "firebase/firestore";
 import Sortable from "sortablejs";
 import { db } from "./firebase-config.js";
-import { getAuthenticatedUser } from "./ui-helpers.js";
+import { getAuthenticatedUser, setLoader } from "./ui-helpers.js";
 import { getUser } from "./auth.js";
 
 /**
@@ -19,7 +19,7 @@ import { getUser } from "./auth.js";
  */
 
 const updateTaskStatus = async (taskId, newStatus) => {
-  if (!taskId || newStatus) {
+  if (!taskId || !newStatus) {
     console.warn("No task ID or status provided");
     return;
   }
@@ -89,7 +89,16 @@ const initializeDragAndDropColumns = () => {
  */
 
 const fetchTasksFromDatabase = async () => {
+  const dashboard = document.querySelector(".container-dashboard");
+  if (!dashboard) {
+    return [];
+  }
+
   const user = await getUser();
+  setLoader(".todo", true);
+  setLoader(".doing", true);
+  setLoader(".done", true);
+
   if (!user) {
     console.warn("No user loggued in. Can no retrive initial tasks.");
     return [];
@@ -99,6 +108,10 @@ const fetchTasksFromDatabase = async () => {
   try {
     const querySnapshot = await getDocs(q);
     const tasks = [];
+
+    setLoader(".todo", false);
+    setLoader(".doing", false);
+    setLoader(".done", false);
 
     querySnapshot.forEach((taskDoc) => {
       const task = taskDoc.data();

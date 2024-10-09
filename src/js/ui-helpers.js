@@ -42,4 +42,37 @@ const generateLogoutButton = async () => {
   displayCurrentUserName(user ? user.email : null);
 };
 
-export { getAuthenticatedUser, generateLogoutButton, displayCurrentUserName };
+/**
+ * Set a loader inside de containerId
+ * @param {string} containerClass --The Class of the container to add the loader
+ * @param {boolean} isLoading --Wether to show or hide the loader
+ * @returns {void}
+ */
+
+const setLoader = (containerClass, isLoading) => {
+  const container = document.querySelector(containerClass);
+
+  if (!container) {
+    console.error("Container not found");
+    return;
+  }
+
+  if (isLoading) {
+    const loader = document.createElement("div");
+    loader.className = "loader";
+    loader.style.textAlign = "center";
+    container.appendChild(loader);
+  } else {
+    const loader = container.querySelector(".loader");
+    if (loader) {
+      loader.remove();
+    }
+  }
+};
+
+export {
+  getAuthenticatedUser,
+  generateLogoutButton,
+  displayCurrentUserName,
+  setLoader,
+};

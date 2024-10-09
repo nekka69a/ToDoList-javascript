@@ -14,13 +14,13 @@ import initializeProtectionRouterListener from "./middleware.js";
  */
 
 const init = () => {
+  changeView();
   updateDisplayedTasks();
   handleClickRegister();
   handleClickLogin();
   initializeProtectionRouterListener();
   initializeAddNewTaskListener();
   initializeDragAndDropColumns();
-  changeView();
   generateLogoutButton();
 };
 
