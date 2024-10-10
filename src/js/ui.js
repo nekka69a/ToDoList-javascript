@@ -4,7 +4,6 @@ import { handleClickLogin } from "./login.js";
 import {
   initializeAddNewTaskListener,
   initializeDragAndDropColumns,
-  updateDisplayedTasks,
 } from "./dashboard.js";
 import { changeView } from "./router.js";
 import initializeProtectionRouterListener from "./middleware.js";
@@ -15,7 +14,6 @@ import initializeProtectionRouterListener from "./middleware.js";
 
 const init = () => {
   changeView();
-  updateDisplayedTasks();
   handleClickRegister();
   handleClickLogin();
   initializeProtectionRouterListener();

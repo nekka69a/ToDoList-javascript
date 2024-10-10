@@ -159,7 +159,8 @@ const updateTasksUI = (tasks) => {
  * Fetches tasks from the database for the user ID and updates the UI to display them.
  */
 const updateDisplayedTasks = async () => {
-  const currentUser = await getAuthenticatedUser();
+  const currentUser = await getUser();
+  console.log(currentUser);
   const userId = currentUser ? currentUser.uid : null;
 
   if (!userId) {
