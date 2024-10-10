@@ -30,7 +30,6 @@ const initializeProtectionRouterListener = async () => {
 
     const containerLoginDiv = bodyLoginDiv.firstElementChild;
     containerLoginDiv.style = "flex";
-
     setLoader("body-login", false);
   }
 

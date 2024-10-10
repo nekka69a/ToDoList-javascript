@@ -9,7 +9,7 @@ import {
 } from "firebase/firestore";
 import Sortable from "sortablejs";
 import { db } from "./firebase-config.js";
-import { getAuthenticatedUser, showAlert, setLoader } from "./ui-helpers.js";
+import { showAlert, setLoader, getAuthenticatedUser } from "./ui-helpers.js";
 import { getUser } from "./auth.js";
 
 // ==========✨ Importations nécessaires pour le fonctionnement de l'application ✨==========
@@ -112,16 +112,14 @@ const fetchTasksFromDatabase = async () => {
     const querySnapshot = await getDocs(q);
     const tasks = [];
 
-    setLoader(".todo", false);
-    setLoader(".doing", false);
-    setLoader(".done", false);
-
     querySnapshot.forEach((taskDoc) => {
       const task = taskDoc.data();
       task.id = taskDoc.id;
       tasks.push(task);
+      setLoader(".todo", false);
+      setLoader(".doing", false);
+      setLoader(".done", false);
     });
-
     return tasks;
   } catch (error) {
     showAlert("Impossible de charger les tâches... Recommencez");
@@ -161,7 +159,7 @@ const updateTasksUI = (tasks) => {
  * Fetches tasks from the database for the user ID and updates the UI to display them.
  */
 const updateDisplayedTasks = async () => {
-  const currentUser = getAuthenticatedUser();
+  const currentUser = await getAuthenticatedUser();
   const userId = currentUser ? currentUser.uid : null;
 
   if (!userId) {
@@ -210,11 +208,11 @@ const generateNewTask = (buttonSelector, taskListSelector, status) => {
     return;
   }
 
-  button.addEventListener("click", () => {
+  button.addEventListener("click", async () => {
     const task = window.prompt("Quel est le contenu de votre tâche ?");
 
     if (task) {
-      const user = getAuthenticatedUser();
+      const user = await getUser();
       if (user) {
         const userId = user.uid;
         addTaskToFirestore(task, status, userId);
