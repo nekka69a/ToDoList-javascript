@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 import { auth } from "./firebase-config.js";
 import { changeView } from "./router.js";
-import { showAlert } from "./ui-helpers.js";
+import { showAlert, setLoader } from "./ui-helpers.js";
 
 /**
  * Create a new user
@@ -19,6 +19,9 @@ const signUpUser = (email, password) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then(() => {
       changeView("dashboard");
+      setLoader(".todo", false);
+      setLoader(".doing", false);
+      setLoader(".done", false);
     })
     .catch((error) => {
       showAlert("Veuillez entrer des identifiants valides !");

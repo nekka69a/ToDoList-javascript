@@ -116,10 +116,12 @@ const fetchTasksFromDatabase = async () => {
       const task = taskDoc.data();
       task.id = taskDoc.id;
       tasks.push(task);
-      setLoader(".todo", false);
-      setLoader(".doing", false);
-      setLoader(".done", false);
     });
+
+    setLoader(".todo", false);
+    setLoader(".doing", false);
+    setLoader(".done", false);
+
     return tasks;
   } catch (error) {
     showAlert("Impossible de charger les tâches... Recommencez");
