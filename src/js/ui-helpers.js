@@ -38,6 +38,9 @@ const displayCurrentUserName = async (email) => {
  */
 const generateLogoutButton = async () => {
   const user = await getUser();
+  if (!user) {
+    return;
+  }
   const divLogout = document.querySelector(".div-logout");
   if (user) {
     const paragraph = document.createElement("p");
