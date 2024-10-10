@@ -9,7 +9,7 @@ import {
 } from "firebase/firestore";
 import Sortable from "sortablejs";
 import { db } from "./firebase-config.js";
-import { showAlert, setLoader, getAuthenticatedUser } from "./ui-helpers.js";
+import { showAlert, setLoader } from "./ui-helpers.js";
 import { getUser } from "./auth.js";
 
 // ==========✨ Importations nécessaires pour le fonctionnement de l'application ✨==========
@@ -160,7 +160,6 @@ const updateTasksUI = (tasks) => {
  */
 const updateDisplayedTasks = async () => {
   const currentUser = await getUser();
-  console.log(currentUser);
   const userId = currentUser ? currentUser.uid : null;
 
   if (!userId) {

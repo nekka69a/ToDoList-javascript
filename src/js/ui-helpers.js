@@ -1,14 +1,7 @@
-import { auth } from "./firebase-config.js";
 import logout from "./logout.js";
 import { getUser } from "./auth.js";
 
 // ==========✨ Importations nécessaires pour le fonctionnement de l'application ✨==========
-
-/**
- * Returns the currently authenticated user.
- * @returns {Object|null} The currently authenticated user, or null if no user is authenticated.
- */
-const getAuthenticatedUser = () => auth.currentUser;
 
 // 👤 Fonctions de gestion de l'utilisateur 👤
 
@@ -99,10 +92,4 @@ const showAlert = (message) => {
 
 // ==========🚀 Exportations des fonctions 🚀==========
 
-export {
-  getAuthenticatedUser,
-  generateLogoutButton,
-  displayCurrentUserName,
-  setLoader,
-  showAlert,
-};
+export { generateLogoutButton, displayCurrentUserName, setLoader, showAlert };
