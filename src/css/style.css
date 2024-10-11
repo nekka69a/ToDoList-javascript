@@ -10,6 +10,7 @@ html {
 body {
   font-family: "Anton", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
+  overflow-y: auto;
 }
 
 /* Typography */
@@ -47,9 +48,10 @@ h2 {
 }
 
 .error-msg {
-  color: rgb(155, 52, 52);
-  margin-top: 10px;
-  font-size: 14px;
+  color: rgb(183, 49, 49);
+  margin-top: 7px;
+  font-size: 12px;
+  text-align: center;
 }
 
 /* Containers style */
@@ -57,7 +59,7 @@ h2 {
 .container-register, .container-login {
   display: flex;
   justify-content: center;
-  height: 95vh;
+  height: 80vh;
 }
 
 .img {
@@ -75,16 +77,18 @@ h2 {
   height: 95vh;
 }
 
-.container-login, .container-register {
-  height: 80vh;
-}
-
 .container-dashboard {
   color: whitesmoke;
   display: flex;
   justify-content: center;
   min-height: 85vh;
   gap: 25px;
+}
+
+.registration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Cards style */
@@ -99,7 +103,7 @@ h2 {
 
 .card-login, .card-register {
   color:whitesmoke;
-  background-color:  rgba(207, 248, 206, 0.699);
+  background-color:  rgba(219, 240, 219, 0.699);
   width: 350px;
   display: flex;
   flex-direction: column;
@@ -108,10 +112,33 @@ h2 {
 }
 
 .todo, .doing, .done {
-  background-color: rgba(207, 248, 206, 0.699);
-  min-width: 500px;
+  background-color: rgba(219, 240, 219, 0.699);
+  min-width: 400px;
   text-align: center;
 }
+
+.todo-list, .doing-list, .done-list {
+  min-height: 10vh;
+
+}
+
+/* Loader style */
+
+.loader {
+  border: 16px solid #EAE6F2;
+  border-top: 16px solid #b7b6b8;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+  margin-left: 130px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 
 /* Buttons and links style */
 
@@ -135,7 +162,7 @@ background-color: rgb(16, 16, 39);
 font-size: 14px;
 display: flex;
 justify-content: center;
-height: 10px;
+height: 8px;
 cursor: pointer;
 }
 
@@ -148,10 +175,29 @@ p {
   text-align: center;
 }
 
-a {
+.no-account {
   font-size: small;
   color:rgb(16, 16, 39);
   margin-top: 10px;
+}
+
+.no-account:hover {
+  cursor: pointer;
+  color: rgb(39, 57, 119);
+}
+
+#submit-register {
+  margin: 0;
+  width: 100%;
+}
+
+#submit-login {
+  margin: 0;
+  width: 100%;
+}
+
+.link-login:hover, .link-register:hover{
+  cursor: pointer;
 }
 
 .username p{
@@ -186,6 +232,7 @@ a {
   border: 0px solid transparent;
   padding: 0 10px;
 }
+
 
 /* Other */
 
@@ -291,6 +338,20 @@ and (max-device-width : 768px) {
   .div-logout {
     margin-top: 10px;
   }
+
+  .loader {
+    border: 10px;
+    border-top: 10px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+    margin-left: 100px;
+  }
+
+  .error-msg {
+    font-size: 12px;
+  }
 }
 
 
@@ -332,6 +393,16 @@ and (max-device-width : 1080px) {
     margin-top: 10px;
     width: 100px;
     left: 40%;
+  }
+
+  .loader {
+    border: 12px;
+    border-top: 12px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+    margin-left: 110px;
   }
 }
 

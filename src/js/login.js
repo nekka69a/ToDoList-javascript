@@ -1,48 +1,43 @@
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { auth } from "./firebase-config.js";
+import { signInUser } from "./auth.js";
+import { showAlert } from "./ui-helpers.js";
+
+// ==========✨ Importations nécessaires pour le fonctionnement de l'application ✨==========
 
 /**
  * This function handles the login process when the login form is submitted.
  * It signs in the user with their email and password, and redirects them to the dashboard if successful.
  * @param {Event} event - The form submission event.
  */
-
-const handleSubmitLogin = async (event) => {
+const handleSubmitLogin = (event) => {
   event.preventDefault();
 
   const emailInput = document.getElementById("mail-input");
   const passwordInput = document.getElementById("password-input");
-  const errorMsg = document.querySelector(".error-msg");
+
   const email = emailInput.value;
   const password = passwordInput.value;
 
   if (!email || !password) {
-    errorMsg.textContent = "Veuillez remplir tous les champs.";
+    showAlert("Identifiants incorrects ! Veuillez réessayer");
     return;
   }
 
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    window.location.href = "dashboard.html";
-  } catch (error) {
-    const errorMessage = error.message;
-    errorMsg.textContent = "Veuillez entrer des identifiants valides !";
-    console.error(errorMessage);
-  }
+  signInUser(email, password);
 };
+
+// ==========🔄 Fonctions de gestion des événements de connexion 🔄==========
 
 /**
- * Sign out the current user and redirects them to the login page.
+ * Function that handles the click event for the login button.
  */
-
-const logout = () => {
-  signOut(auth)
-    .then(() => {
-      window.location.href = "login.html";
-    })
-    .catch((error) => {
-      console.error("Error signing out:", error);
-    });
+const handleClickLogin = () => {
+  const submitLogin = document.querySelector(".login-submit");
+  if (!submitLogin) {
+    return;
+  }
+  submitLogin.addEventListener("click", handleSubmitLogin);
 };
 
-export { handleSubmitLogin, logout };
+// ==========🚀 Exportations des fonctions 🚀==========
+
+export { handleSubmitLogin, handleClickLogin };

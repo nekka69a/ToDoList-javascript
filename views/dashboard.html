@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="name" content="To do list" />
+    <meta name="name" content="Todo list" />
     <meta name="description" content="Gestionnaire de tâches"/>
     <title>Gestionnaire de tâches</title>
     <link rel="stylesheet" href="../src/css/style.css">
@@ -11,7 +11,6 @@
   </head>
   <body>
     <div class="container-dashboard">
-      
       <div class="todo">
         <div class="h2">
         <h2>TODO</h2>
@@ -19,7 +18,7 @@
         <div>
           <button class="todo-button" type="submit">Add task</button>
         </div>
-        <div class="todo-list"></div>
+        <div class="todo-list" id="task-container"></div>
       </div>
       <div class="doing">
         <div class="h2">
@@ -28,7 +27,7 @@
         <div>
           <button class="doing-button" type="submit">Add task</button>
         </div>
-        <div class="doing-list"></div>
+        <div class="doing-list" id="task-container"></div>
       </div>
       <div class="done">
         <div class="h2">
@@ -37,8 +36,13 @@
         <div>
         <button class="done-button" type="submit">Add task</button>
       </div>
-      <div class="done-list"></div>
+      <div class="done-list" id="task-container"></div>
     </div>
+    </div>
+    <div id="error-msg-container" class="error-msg" style="display: none;">
+      <div class="error-box">
+        <span class="alert-msg"></span>
+      </div>
     </div>
     <div class="username"></div>
     <div class="div-logout"></div>
